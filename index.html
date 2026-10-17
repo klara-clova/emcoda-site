@@ -184,7 +184,19 @@ footer{padding:40px 0 56px;color:var(--ink-soft);font-size:.9rem;text-align:cent
   .price-box{padding:8px 22px}
   .row{flex-direction:column;gap:4px}
 }
-@media (prefers-reduced-motion:reduce){
+/* custom dropdown (What do you need?) */
+.pick{position:relative}
+.pick select{position:absolute;inset:0;opacity:0;pointer-events:none}
+.form .pick-btn{width:100%;display:flex;align-items:center;justify-content:space-between;gap:10px;text-align:left;font:inherit;font-size:.97rem;font-weight:400;color:var(--ink);background:var(--paper);border:1.5px solid transparent;border-radius:999px;padding:12px 16px;cursor:pointer}
+.form .pick-btn:focus-visible,.pick.open .pick-btn{outline:none;border-color:var(--moss)}
+.pick-btn svg{flex:none;transition:transform .2s}
+.pick.open .pick-btn svg{transform:rotate(180deg)}
+.pick-list{position:absolute;left:0;right:0;top:calc(100% + 6px);z-index:20;margin:0;padding:6px;list-style:none;background:var(--paper);border:1.5px solid var(--sage-soft);border-radius:20px;box-shadow:var(--glow)}
+.pick-list[hidden]{display:none}
+.pick-list li{padding:10px 14px;border-radius:14px;cursor:pointer;font-size:.97rem}
+.pick-list li.active{background:var(--sage-soft)}
+.pick-list li[aria-selected="true"]{color:var(--moss);font-weight:600}
+  @media (prefers-reduced-motion:reduce){
   .msg{animation:none;opacity:1;transform:none}
   .badge .dot{animation:none}
   .btn{transition:none}
@@ -444,5 +456,71 @@ footer{padding:40px 0 56px;color:var(--ink-soft);font-size:.9rem;text-align:cent
   window.addEventListener('scroll',onScroll,{passive:true});onScroll();
 })();
 </script>
-</body>
+</body><script>
+(function(){
+  var sel=document.getElementById('f-type');
+  if(!sel) return;
+  var wrap=document.createElement('div');wrap.className='pick';
+  sel.parentNode.insertBefore(wrap,sel);wrap.appendChild(sel);
+  sel.tabIndex=-1;sel.setAttribute('aria-hidden','true');
+  var btn=document.createElement('button');
+  btn.type='button';btn.className='pick-btn';btn.id='f-type-btn';
+  btn.setAttribute('aria-haspopup','listbox');btn.setAttribute('aria-expanded','false');
+  btn.innerHTML='<span></span><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M3 5l4 4 4-4" fill="none" stroke="#4F6146" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  var list=document.createElement('ul');
+  list.className='pick-list';list.id='f-type-list';list.setAttribute('role','listbox');list.hidden=true;
+  btn.setAttribute('aria-controls',list.id);
+  var label=document.querySelector('label[for="f-type"]');
+  if(label){label.htmlFor=btn.id;label.id='f-type-label';list.setAttribute('aria-labelledby',label.id);}
+  wrap.appendChild(btn);wrap.appendChild(list);
+  var items=[],active=0;
+  Array.prototype.forEach.call(sel.options,function(o,i){
+    var li=document.createElement('li');
+    li.id='f-type-opt'+i;li.setAttribute('role','option');li.textContent=o.text;
+    li.addEventListener('mousedown',function(e){e.preventDefault();});
+    li.addEventListener('click',function(){choose(i);});
+    li.addEventListener('mousemove',function(){setActive(i);});
+    list.appendChild(li);items.push(li);
+  });
+  function render(){
+    btn.firstChild.textContent=sel.options[sel.selectedIndex].text;
+    items.forEach(function(li,i){li.setAttribute('aria-selected',i===sel.selectedIndex?'true':'false');});
+  }
+  function setActive(i){
+    active=(i+items.length)%items.length;
+    items.forEach(function(li,j){li.classList.toggle('active',j===active);});
+    btn.setAttribute('aria-activedescendant',items[active].id);
+  }
+  function open(){
+    list.hidden=false;wrap.classList.add('open');btn.setAttribute('aria-expanded','true');
+    setActive(sel.selectedIndex);
+  }
+  function close(){
+    list.hidden=true;wrap.classList.remove('open');btn.setAttribute('aria-expanded','false');
+    btn.removeAttribute('aria-activedescendant');
+  }
+  function choose(i){
+    sel.selectedIndex=i;sel.dispatchEvent(new Event('change',{bubbles:true}));
+    render();close();btn.focus();
+  }
+  btn.addEventListener('click',function(){list.hidden?open():close();});
+  btn.addEventListener('keydown',function(e){
+    var k=e.key;
+    if(list.hidden){
+      if(k==='ArrowDown'||k==='ArrowUp'){e.preventDefault();open();}
+      return;
+    }
+    if(k==='ArrowDown'){e.preventDefault();setActive(active+1);}
+    else if(k==='ArrowUp'){e.preventDefault();setActive(active-1);}
+    else if(k==='Home'){e.preventDefault();setActive(0);}
+    else if(k==='End'){e.preventDefault();setActive(items.length-1);}
+    else if(k==='Enter'||k===' '){e.preventDefault();choose(active);}
+    else if(k==='Escape'){e.preventDefault();close();}
+    else if(k==='Tab'){close();}
+  });
+  document.addEventListener('click',function(e){if(!wrap.contains(e.target)) close();});
+  sel.form&&sel.form.addEventListener('reset',function(){setTimeout(render,0);});
+  render();
+})();
+</script>
 </html>
