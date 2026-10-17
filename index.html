@@ -155,7 +155,11 @@ section{padding:88px 0}
 .amount{font-family:var(--serif);font-size:1.5rem;white-space:nowrap}
 .amount small{font-family:var(--sans);font-size:.85rem;color:var(--ink-soft)}
 .note{margin-top:22px;color:var(--ink-soft);max-width:60ch}
-
+.founding{margin-top:28px;max-width:760px;background:var(--blush-soft);border:1.5px dashed var(--blush);border-radius:32px;padding:28px 36px}
+.founding .badge{margin-bottom:14px}
+.founding h3{font-family:var(--serif);font-size:1.35rem;font-weight:400;margin-bottom:8px}
+.founding p{color:var(--ink-soft);max-width:60ch;margin-bottom:18px}
+@media (max-width:640px){.founding{padding:22px}}
 /* about + contact */
 .about{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
 .about p{color:var(--ink-soft);margin-top:14px;max-width:48ch}
@@ -384,6 +388,12 @@ footer{padding:40px 0 56px;color:var(--ink-soft);font-size:.9rem;text-align:cent
       <div class="row"><div><h3>Custom bot</h3><p>Your own features, built from scratch</p></div><div class="amount">from £250</div></div>
       <div class="row"><div><h3>Bot + web dashboard</h3><p>A bot plus a page members log into with Discord</p></div><div class="amount">from £500</div></div>
       <div class="row"><div><h3>Hosting & care</h3><p>Hosting, fixes and small updates</p></div><div class="amount">from £15 <small>/ month</small></div></div>
+    </div>
+        <div class="founding">
+      <span class="badge"><span class="dot" aria-hidden="true"></span>Founding clients · 3 spots</span>
+      <h3>30% off for my first three clients</h3>
+      <p>I'm opening three founding spots at 30% off any project. In return, I'd love your honest feedback when we're done, and your permission to show the project here as a case study.</p>
+      <a href="#contact" class="btn btn-main">Claim a founding spot</a>
     </div>
     <p class="note">Every community is different. Send me a message and I'll give you a free quote, usually within a day.</p>
   </div>
