@@ -196,6 +196,13 @@ footer{padding:40px 0 56px;color:var(--ink-soft);font-size:.9rem;text-align:cent
 .pick-list li{padding:10px 14px;border-radius:14px;cursor:pointer;font-size:.97rem}
 .pick-list li.active{background:var(--sage-soft)}
 .pick-list li[aria-selected="true"]{color:var(--moss);font-weight:600}
+  /* olivazold, kerek gorgetosav */
+::-webkit-scrollbar{width:12px;height:12px}
+::-webkit-scrollbar-track{background:var(--oat-deep);border-radius:999px}
+::-webkit-scrollbar-thumb{background:var(--moss);border-radius:999px;border:3px solid var(--oat-deep)}
+::-webkit-scrollbar-thumb:hover{background:var(--ink)}
+::-webkit-scrollbar-button{display:none}
+@supports not selector(::-webkit-scrollbar){html{scrollbar-color:var(--moss) var(--oat-deep);scrollbar-width:thin}}
   @media (prefers-reduced-motion:reduce){
   .msg{animation:none;opacity:1;transform:none}
   .badge .dot{animation:none}
