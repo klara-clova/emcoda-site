@@ -170,6 +170,29 @@ section{scroll-margin-top:20px}
 .founding .btn{background:#2B2140;color:#FFF8F2;border-color:#2B2140}
 .note{color:var(--muted);margin:24px 0 0}
 
+/* ---------- MOSS showcase ---------- */
+.moss{border-radius:36px;padding:40px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:36px;align-items:center}
+.moss-text{display:flex;flex-direction:column;gap:16px}
+.moss-text h3{font-size:clamp(30px,4vw,42px);line-height:1.1}
+.moss-text p{margin:0}
+.moss-text ul{margin:0;padding-left:20px}
+.moss-text li{margin:4px 0}
+.moss-text .pill{align-self:flex-start;background:#FFFFFF;border:2px solid var(--line)}
+.moss-ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:6px}
+.moss-ctas .btn{padding:14px 22px;font-size:16px}
+.moss-ctas .btn-dark{background:#2B2140;color:#FFF8F2;border-color:#2B2140}
+.moss-ctas .btn-white{background:#FFFFFF;color:#2B2140}
+.moss-shots{position:relative;display:flex;flex-direction:column;gap:14px}
+.moss-shots img{display:block;width:100%;height:auto;border:2px solid var(--line);border-radius:18px;box-shadow:0 5px 0 var(--line);background:#FFFFFF}
+.moss-shots .s1{transform:rotate(-1.5deg);width:88%}
+.moss-shots .s2{transform:rotate(1.2deg);width:88%;align-self:flex-end}
+.moss-snails{display:flex;align-items:center;gap:14px;background:#FFFFFF;border:2px solid var(--line);border-radius:18px;box-shadow:0 5px 0 var(--line);padding:10px 14px}
+.moss-snails img{flex:1 1 0;min-width:0;max-width:340px;border:0;box-shadow:none;border-radius:0;image-rendering:pixelated}
+.moss-snails span{flex:none;font-family:Fredoka,sans-serif;font-weight:600;font-size:15px;line-height:1.2;color:#2B2140}
+.moss-note{margin:22px 0 0;color:var(--muted)}
+@media (max-width:860px){.moss{grid-template-columns:1fr;padding:28px 22px}}
+@media (max-width:560px){.moss-snails{flex-direction:column;align-items:flex-start;gap:6px}.moss-snails img{flex:none;width:100%}}
+
 /* ---------- Contact ---------- */
 .hello{position:relative;background:var(--lav);border-radius:40px;padding:64px 48px;overflow:hidden}
 .hello .em-blob{position:absolute}
@@ -348,6 +371,36 @@ footer .logo{font-size:20px;color:var(--ink)}
         <a href="https://pixelroombot.com">Visit PixelRoom →</a>
       </article>
     </div>
+  </section>
+
+  <section id="moss" class="sec">
+    <div class="sec-head">
+      <h2>Meet MOSS</h2>
+      <p>My own free bot, built to show what a bot with real care in it feels like.</p>
+    </div>
+    <article class="moss sticker" style="background:var(--lav)">
+      <div class="moss-text">
+        <span class="pill"><span class="dot em-blink" aria-hidden="true"></span>Free &middot; Live</span>
+        <h3>A cosy Discord bot with a pixel snail.</h3>
+        <p>MOSS welcomes new members, hands out roles, runs your tickets and giveaways, and gives everyone a rank card to show off. You set it up on a friendly web page, no commands to learn.</p>
+        <ul>
+          <li>Picture welcome cards and a one-click role picker</li>
+          <li>Tickets, events, polls, giveaways and birthdays</li>
+          <li>XP, levels and rank cards you can restyle</li>
+          <li>25 little snails to catch and collect</li>
+        </ul>
+        <div class="moss-ctas">
+          <a class="btn btn-dark em-btn" href="https://moss.emcoda.com">Try MOSS</a>
+          <a class="btn btn-white em-btn" href="#hello">Want one for your server?</a>
+        </div>
+      </div>
+      <div class="moss-shots" aria-hidden="true">
+        <img class="s1" src="moss/welcome-card.png" alt="" loading="lazy" width="1000" height="380">
+        <img class="s2" src="moss/rank-card-custom.png" alt="" loading="lazy" width="880" height="334">
+        <div class="moss-snails"><img src="moss/snails.png" alt="" loading="lazy" width="540" height="174"><span>25 snails<br>to collect</span></div>
+      </div>
+    </article>
+    <p class="moss-note">MOSS is free for everyone. A bot made just for your community works the same way, only it's yours: your look, your features, your rules.</p>
   </section>
 
   <section id="how" class="sec">
