@@ -75,7 +75,7 @@ footer{padding:0 0 48px;color:var(--muted);font-size:.9rem;text-align:center}
 
   <main>
     <h1>Privacy notice</h1>
-    <p class="updated">Last updated: 22 October 2026</p>
+    <p class="updated">Last updated: 4 November 2026</p>
 
     <h2>Who I am</h2>
     <p>Emcoda is a small studio run by Ema, a sole trader based in the United Kingdom. I'm responsible for the personal details you share through this website. If you have any questions about this notice, you can reach me through the contact form on the home page.</p>
@@ -88,7 +88,7 @@ footer{padding:0 0 48px;color:var(--muted);font-size:.9rem;text-align:center}
       <li>the type of help you're looking for</li>
       <li>anything you write in your message</li>
     </ul>
-    <p>I don't use analytics, tracking cookies or advertising tools on this website. If you switch between light and dark mode, your browser remembers that choice on your own device. It is never sent to me.</p>
+    <p>I use a small visit counter that runs on my own server. It counts page views per day and notes which page was opened and which website you came from (for example Instagram). It uses no cookies, does not store your name or IP address in my statistics, and does nothing if your browser sends a Do Not Track signal. Like any web server, the server may briefly see your IP address in short-lived security logs. I don't use tracking cookies or advertising tools. If you switch between light and dark mode, your browser remembers that choice on your own device. It is never sent to me.</p>
 
     <h2>Why I use it</h2>
     <p>I use your details only to reply to your enquiry and, if we decide to work together, to plan and deliver your project. The legal basis is my legitimate interest in answering messages people send me, and taking steps at your request before entering into a contract.</p>
@@ -118,5 +118,6 @@ footer{padding:0 0 48px;color:var(--muted);font-size:.9rem;text-align:center}
   btn.addEventListener('click',function(){var n=isDark()?'light':'dark';root.setAttribute('data-theme',n);try{localStorage.setItem('emcoda-theme',n);}catch(e){}});
 })();
 </script>
+<script>(function(){try{if(navigator.doNotTrack==="1")return;var r="";try{r=document.referrer?new URL(document.referrer).hostname:""}catch(e){}var u=(new URLSearchParams(location.search)).get("utm_source")||"";new Image().src="https://stats.emcoda.com/hit?s=emcoda&p="+encodeURIComponent(location.pathname)+"&r="+encodeURIComponent(r)+"&u="+encodeURIComponent(u)+"&t="+Date.now()}catch(e){}})();</script>
 </body>
 </html>
