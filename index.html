@@ -36,7 +36,14 @@ h1,h2,h3{font-family:Fredoka,sans-serif;font-weight:700;margin:0}
 @keyframes emFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
 @keyframes emWiggle{0%,100%{transform:rotate(-3deg)}50%{transform:rotate(3deg)}}
 @keyframes emMarquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-@keyframes emScurry{0%{transform:translateX(0) scaleX(1)}8%{transform:translateX(40px) translateY(-4px) scaleX(1)}16%{transform:translateX(40px) scaleX(1)}40%{transform:translateX(var(--run)) scaleX(1)}50%{transform:translateX(var(--run)) scaleX(-1)}58%{transform:translateX(calc(var(--run) - 80px)) translateY(-6px) scaleX(-1)}66%{transform:translateX(calc(var(--run) - 80px)) scaleX(-1)}92%{transform:translateX(0) scaleX(-1)}100%{transform:translateX(0) scaleX(1)}}
+@property --amp{syntax:'<number>';inherits:true;initial-value:0}
+@property --sw{syntax:'<angle>';inherits:true;initial-value:0deg}
+@property --bob{syntax:'<length>';inherits:true;initial-value:0px}
+@keyframes emRoute{0%,2%{transform:translateX(0) perspective(500px) rotateY(0deg)}38%,46%{transform:translateX(var(--run)) perspective(500px) rotateY(0deg)}50%,52%{transform:translateX(var(--run)) perspective(500px) rotateY(180deg)}88%,96%{transform:translateX(0) perspective(500px) rotateY(180deg)}100%{transform:translateX(0) perspective(500px) rotateY(360deg)}}
+@keyframes emAmp{0%{--amp:0}2%{--amp:1}37%{--amp:1}39%{--amp:0}51%{--amp:0}53%{--amp:1}86%{--amp:1}88%{--amp:0}100%{--amp:0}}
+@keyframes emSw{0%,100%{--sw:-17deg}50%{--sw:17deg}}
+@keyframes emBob{0%,100%{--bob:0px}50%{--bob:-1.6px}}
+@keyframes emTail{0%,100%{transform:rotate(-5deg)}50%{transform:rotate(7deg)}}
 @keyframes emBlob{0%,100%{border-radius:42% 58% 63% 37%/45% 41% 59% 55%;transform:translate(0,0)}50%{border-radius:60% 40% 35% 65%/55% 60% 40% 45%;transform:translate(22px,-18px)}}
 @keyframes emBlink{0%,100%{opacity:1}50%{opacity:.25}}
 .em-float{animation:emFloat 4s ease-in-out infinite}
@@ -89,7 +96,14 @@ h1,h2,h3{font-family:Fredoka,sans-serif;font-weight:700;margin:0}
 .bubble{border:2px solid var(--line);box-shadow:0 5px 0 var(--line);padding:14px 18px;max-width:320px;color:var(--on-pastel);font-weight:600}
 .bubble small{display:block;font-size:12px;font-weight:700;opacity:.75}
 .mouse-track{position:absolute;left:20px;bottom:-6px;width:380px;max-width:calc(100% - 20px);height:40px;--run:300px}
-.em-scurry{animation:emScurry 6s ease-in-out infinite;width:68px;height:45px}
+.em-scurry{width:96px;height:64px;margin-top:-32px;animation:emRoute 14s linear infinite,emAmp 14s linear infinite,emSw .5s ease-in-out infinite,emBob .25s ease-in-out infinite}
+.em-mouse{position:relative;width:96px;height:64px}
+.em-mouse img{position:absolute;inset:0;width:100%;height:100%;display:block}
+.m-tail{transform-origin:21% 66%;animation:emTail 1.8s ease-in-out infinite}
+.m-hind{transform-origin:35% 77%;transform:rotate(calc(var(--sw) * var(--amp)))}
+.m-front{transform-origin:75% 77%;transform:rotate(calc(var(--sw) * var(--amp) * -1))}
+.m-body{transform:translateY(calc(var(--bob) * var(--amp)))}
+@media (prefers-reduced-motion:reduce){.em-scurry,.m-tail{animation:none}}
 
 /* ---------- Marquee ---------- */
 .strip-wrap{overflow:hidden;padding:16px 0}
@@ -280,9 +294,7 @@ footer .logo{font-size:20px;color:var(--ink)}
         <div class="bubble em-float" style="align-self:flex-start;margin-left:40px;background:var(--mint);border-radius:22px 22px 22px 6px;animation-delay:-2.6s"><small>YourBot</small>Match found: you both want the blue teapot.</div>
       </div>
       <div class="mouse-track">
-        <div class="em-scurry">
-          <img src="em-mouse.png" width="68" height="45" alt="" decoding="async" style="display:block">
-        </div>
+        <div class="em-scurry"><div class="em-mouse" aria-hidden="true"><img class="m-tail" src="em-mouse-tail.png" alt=""><img class="m-hind" src="em-mouse-hind.png" alt=""><img class="m-body" src="em-mouse-body.png" alt=""><img class="m-front" src="em-mouse-front.png" alt=""></div></div>
       </div>
     </div>
   </header>
