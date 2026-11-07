@@ -37,14 +37,10 @@ h1,h2,h3{font-family:Fredoka,sans-serif;font-weight:700;margin:0}
 @keyframes emWiggle{0%,100%{transform:rotate(-3deg)}50%{transform:rotate(3deg)}}
 @keyframes emMarquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 @property --amp{syntax:'<number>';inherits:true;initial-value:0}
-@property --sw{syntax:'<angle>';inherits:true;initial-value:0deg}
-@property --bob{syntax:'<length>';inherits:true;initial-value:0px}
 @keyframes emRoute{0%,2%{transform:translateX(0) scaleX(1)}38%,48%{transform:translateX(var(--run)) scaleX(1)}48.01%,52%{transform:translateX(var(--run)) scaleX(-1)}88%,98%{transform:translateX(0) scaleX(-1)}98.01%,100%{transform:translateX(0) scaleX(1)}}
 @keyframes emHop{0%,45%,48%,95%,98%,100%{transform:translateY(0)}46.5%,96.5%{transform:translateY(-5px)}}
+@keyframes emSteps{from{background-position-x:0}to{background-position-x:-1408px}}
 @keyframes emAmp{0%{--amp:0}2%{--amp:1}37%{--amp:1}39%{--amp:0}51%{--amp:0}53%{--amp:1}86%{--amp:1}88%{--amp:0}100%{--amp:0}}
-@keyframes emSw{0%,100%{--sw:-17deg}50%{--sw:17deg}}
-@keyframes emBob{0%,100%{--bob:0px}50%{--bob:-1.6px}}
-@keyframes emTail{0%,100%{transform:rotate(-5deg)}50%{transform:rotate(7deg)}}
 @keyframes emBlob{0%,100%{border-radius:42% 58% 63% 37%/45% 41% 59% 55%;transform:translate(0,0)}50%{border-radius:60% 40% 35% 65%/55% 60% 40% 45%;transform:translate(22px,-18px)}}
 @keyframes emBlink{0%,100%{opacity:1}50%{opacity:.25}}
 .em-float{animation:emFloat 4s ease-in-out infinite}
@@ -97,14 +93,12 @@ h1,h2,h3{font-family:Fredoka,sans-serif;font-weight:700;margin:0}
 .bubble{border:2px solid var(--line);box-shadow:0 5px 0 var(--line);padding:14px 18px;max-width:320px;color:var(--on-pastel);font-weight:600}
 .bubble small{display:block;font-size:12px;font-weight:700;opacity:.75}
 .mouse-track{position:absolute;left:20px;bottom:-6px;width:380px;max-width:calc(100% - 20px);height:40px;--run:300px}
-.em-scurry{width:80px;height:54px;margin-top:-23px;animation:emRoute 14s linear infinite,emAmp 14s linear infinite,emSw .5s ease-in-out infinite,emBob .25s ease-in-out infinite}
-.em-mouse{position:relative;width:80px;height:54px;animation:emHop 14s linear infinite}
-.em-mouse img{position:absolute;inset:0;width:100%;height:100%;display:block;image-rendering:pixelated}
-.m-tail{transform-origin:22% 65%;animation:emTail 1.8s ease-in-out infinite}
-.m-hind{transform-origin:35% 76%;transform:rotate(calc(var(--sw) * var(--amp)))}
-.m-front{transform-origin:74% 76%;transform:rotate(calc(var(--sw) * var(--amp) * -1))}
-.m-body{transform:translateY(calc(var(--bob) * var(--amp)))}
-@media (prefers-reduced-motion:reduce){.em-scurry,.em-mouse,.m-tail{animation:none}}
+.em-scurry{width:88px;height:48px;margin-top:-17px;animation:emRoute 14s linear infinite,emAmp 14s linear infinite}
+.em-mouse{position:relative;width:88px;height:48px;animation:emHop 14s linear infinite}
+.em-mouse span{position:absolute;inset:0;background:url(em-mouse-walk.png) 0 0/1408px 48px no-repeat;image-rendering:pixelated}
+.m-walk{opacity:var(--amp);animation:emSteps 1.8s steps(16) infinite}
+.m-idle{opacity:calc(1 - var(--amp))}
+@media (prefers-reduced-motion:reduce){.em-scurry,.em-mouse,.m-walk{animation:none}}
 
 /* ---------- Marquee ---------- */
 .strip-wrap{overflow:hidden;padding:16px 0}
@@ -295,7 +289,7 @@ footer .logo{font-size:20px;color:var(--ink)}
         <div class="bubble em-float" style="align-self:flex-start;margin-left:40px;background:var(--mint);border-radius:22px 22px 22px 6px;animation-delay:-2.6s"><small>YourBot</small>Match found: you both want the blue teapot.</div>
       </div>
       <div class="mouse-track">
-        <div class="em-scurry"><div class="em-mouse" aria-hidden="true"><img class="m-tail" src="em-mouse-tail.png" alt=""><img class="m-hind" src="em-mouse-hind.png" alt=""><img class="m-body" src="em-mouse-body.png" alt=""><img class="m-front" src="em-mouse-front.png" alt=""></div></div>
+        <div class="em-scurry"><div class="em-mouse" aria-hidden="true"><span class="m-idle"></span><span class="m-walk"></span></div></div>
       </div>
     </div>
   </header>
