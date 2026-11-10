@@ -427,7 +427,7 @@ footer .logo{font-size:20px;color:var(--ink)}
       <a class="btn em-btn" href="#hello">Claim a founding spot</a>
     </div>
     <p class="note">Every community is different. Send me a message and I'll give you a free quote, usually within a day.</p>
-    <p class="note">You pay by UK bank transfer or PayPal, with a proper invoice. Every build comes with 14 days of free bug fixes, and with Hosting &amp; care I fix it whenever your bot has a problem.</p>
+    <p class="note">You pay by UK bank transfer or PayPal, with a proper invoice: the full price up front for a Branded welcome bot, and half up front, half at handover for bigger projects. Every build comes with 14 days of free bug fixes, and with Hosting &amp; care I fix it whenever your bot has a problem.</p>
   </section>
 
   <section id="hello" class="sec">
@@ -457,11 +457,11 @@ footer .logo{font-size:20px;color:var(--ink)}
             <div><label for="f-email">Email</label><input id="f-email" name="email" type="email" autocomplete="email" required></div>
             <div><label for="f-type">What do you need?</label>
               <select id="f-type" name="type">
-                <option>A custom bot</option>
-                <option>A bot + web dashboard</option>
-                <option>An AI feature</option>
-                <option>Hosting &amp; care for an existing bot</option>
-                <option>Not sure yet</option>
+                <option>Branded welcome bot</option>
+                <option>Welcome + rank cards</option>
+                <option>Bot + web dashboard</option>
+                <option>Hosting &amp; care</option>
+                <option>Something else or not sure yet</option>
               </select>
             </div>
             <div><label for="f-msg">About your community</label><textarea id="f-msg" name="message" placeholder="What's your server about, and what would you love it to do?" required></textarea></div>
@@ -554,6 +554,7 @@ footer .logo{font-size:20px;color:var(--ink)}
   });
   document.addEventListener('click',function(e){if(!wrap.contains(e.target)) close();});
   sel.form&&sel.form.addEventListener('reset',function(){setTimeout(render,0);});
+  sel.addEventListener('change',render);
   render();
 })();
 </script>
@@ -582,6 +583,9 @@ footer .logo{font-size:20px;color:var(--ink)}
   });
   [].slice.call(document.querySelectorAll('dialog.pkg')).forEach(function(d){
     d.addEventListener('click',function(e){
+      var ask=e.target.closest&&e.target.closest('a[data-close]');
+      if(ask){var s=document.getElementById('f-type'),h=d.querySelector('h3');
+        if(s&&h){for(var i=0;i<s.options.length;i++){if(s.options[i].text===h.textContent){s.selectedIndex=i;s.dispatchEvent(new Event('change',{bubbles:true}));break;}}}}
       if(e.target===d||(e.target.closest&&e.target.closest('[data-close]'))){d.close();}
     });
   });
