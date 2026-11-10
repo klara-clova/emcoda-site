@@ -1,0 +1,376 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Custom Discord Welcome &amp; Rank Card Bot | Emcoda</title>
+<meta name="description" content="A Discord bot with your own name and avatar, plus welcome and rank cards in your colours. Made in England for creators and gaming communities. From £79.">
+<link rel="canonical" href="https://emcoda.com/discord-welcome-rank-card-bot.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Emcoda">
+<meta property="og:url" content="https://emcoda.com/discord-welcome-rank-card-bot.html">
+<meta property="og:title" content="Custom Discord Welcome &amp; Rank Card Bot | Emcoda">
+<meta property="og:description" content="A Discord bot with your own name and avatar, plus welcome and rank cards in your colours. Made in England for creators and gaming communities. From £79.">
+<meta property="og:image" content="https://emcoda.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Custom Discord Welcome &amp; Rank Card Bot | Emcoda">
+<meta name="twitter:description" content="A Discord bot with your own name and avatar, plus welcome and rank cards in your colours. Made in England for creators and gaming communities. From £79.">
+<meta name="twitter:image" content="https://emcoda.com/og-image.png">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+/* ---------- Colours: cosy purple (dark only) ---------- */
+:root{
+  --bg:#211A33;--ink:#F6EEFF;--muted:#C3B6DE;--surface:#2E2547;
+  --line:#110C1D;            /* outlines and sticker shadows */
+  --on-pastel:#2B2140;       /* text on the pastel cards */
+  --peach:#FFD8C2;--pink:#FFC6DA;--mint:#C6F0DD;--lav:#DCCBFF;--butter:#FFF1A8;
+  --blob-1:#3A2C59;--blob-2:#2B3B47;--blob-3:#463A2C;
+  --strip-bg:#DCCBFF;--strip-fg:#2B2140;
+  --btn-dark-bg:#FFD8C2;--btn-dark-fg:#2B2140;
+  --live:#7FE0B4;--link-hover:#FFC6DA;
+  color-scheme:dark;
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Nunito,system-ui,sans-serif;font-size:17px;line-height:1.55;overflow-x:hidden;transition:background .3s,color .3s}
+a{color:inherit}
+a:hover{color:var(--link-hover)}
+h1,h2,h3{font-family:Fredoka,sans-serif;font-weight:700;margin:0}
+.wrap{max-width:1200px;margin:0 auto;padding:0 24px}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* ---------- Motion ---------- */
+@keyframes emFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+@keyframes emWiggle{0%,100%{transform:rotate(-3deg)}50%{transform:rotate(3deg)}}
+@keyframes emMarquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@property --amp{syntax:'<number>';inherits:true;initial-value:0}
+@keyframes emRoute{0%,2%{transform:translateX(0) scaleX(1)}38%,48%{transform:translateX(var(--run)) scaleX(1)}48.01%,52%{transform:translateX(var(--run)) scaleX(-1)}88%,98%{transform:translateX(0) scaleX(-1)}98.01%,100%{transform:translateX(0) scaleX(1)}}
+@keyframes emHop{0%,45%,48%,95%,98%,100%{transform:translateY(0)}46.5%,96.5%{transform:translateY(-5px)}}
+@keyframes emSteps{from{background-position-x:0}to{background-position-x:-1408px}}
+@keyframes emAmp{0%{--amp:0}2%{--amp:1}37%{--amp:1}39%{--amp:0}51%{--amp:0}53%{--amp:1}86%{--amp:1}88%{--amp:0}100%{--amp:0}}
+@keyframes emBlob{0%,100%{border-radius:42% 58% 63% 37%/45% 41% 59% 55%;transform:translate(0,0)}50%{border-radius:60% 40% 35% 65%/55% 60% 40% 45%;transform:translate(22px,-18px)}}
+@keyframes emBlink{0%,100%{opacity:1}50%{opacity:.25}}
+.em-float{animation:emFloat 4s ease-in-out infinite}
+.em-wiggle{display:inline-block;animation:emWiggle 2.4s ease-in-out infinite}
+.em-blob{border-radius:42% 58% 63% 37%/45% 41% 59% 55%;animation:emBlob 9s ease-in-out infinite}
+.em-blink{animation:emBlink 1.2s ease-in-out infinite}
+.em-btn{transition:transform .2s cubic-bezier(.3,1.6,.5,1)}
+.em-btn:hover{transform:translateY(-3px) scale(1.03)}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none !important;transition:none !important}
+  html{scroll-behavior:auto}
+}
+
+/* ---------- Buttons, pills, stickers ---------- */
+.btn{display:inline-block;text-decoration:none;font-weight:700;border-radius:999px;padding:18px 28px;font-size:17px;border:2px solid var(--line);font-family:inherit;cursor:pointer}
+.btn-peach{background:var(--peach);color:var(--on-pastel);box-shadow:0 6px 0 var(--line)}
+.btn-peach:hover{color:var(--on-pastel)}
+.btn-white{background:var(--surface);color:var(--ink)}
+.btn-dark{background:var(--btn-dark-bg);color:var(--btn-dark-fg);border-color:var(--btn-dark-bg)}
+.btn-dark:hover{color:var(--btn-dark-fg)}
+.pill{display:inline-flex;align-items:center;gap:8px;background:var(--mint);color:var(--on-pastel);padding:8px 16px;border-radius:999px;font-weight:700;font-size:14px}
+.pill .dot{width:8px;height:8px;border-radius:4px;background:#1E7A55}
+.sticker{border:2px solid var(--line);box-shadow:0 6px 0 var(--line);color:var(--on-pastel)}
+
+/* ---------- Nav ---------- */
+.nav{display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;padding-top:28px}
+.logo{display:flex;align-items:center;gap:10px;font-family:Fredoka,sans-serif;font-weight:700;font-size:28px;text-decoration:none}
+.logo-dot{width:18px;height:18px;border-radius:9px;background:var(--peach);border:2px solid var(--line)}
+.nav-links{display:flex;flex-wrap:wrap;gap:4px;align-items:center;font-weight:700;font-size:16px}
+.nav-links a{text-decoration:none;padding:10px 14px;border-radius:999px}
+.nav-links .btn-dark{padding:12px 22px;margin-left:4px}
+
+
+/* ---------- Scroll reveal: things drift in as you scroll ---------- */
+.js .rv{opacity:0;translate:0 46px;scale:.96;transition:opacity .8s cubic-bezier(.2,.7,.2,1),translate .8s cubic-bezier(.2,.7,.2,1),scale .8s cubic-bezier(.2,.7,.2,1);transition-delay:var(--d,0s)}
+.js .rv.in{opacity:1;translate:none;scale:none}
+@media (prefers-reduced-motion:reduce){.js .rv{opacity:1;translate:none;scale:none;transition:none}}
+
+/* ---------- Hero ---------- */
+.hero{display:flex;flex-wrap:wrap;gap:48px;align-items:center;padding:64px 0 72px}
+.hero-text{flex:1 1 480px;min-width:0;display:flex;flex-direction:column;gap:26px}
+.hero-text .pill{align-self:flex-start}
+.hero h1{font-size:clamp(44px,6vw,76px);line-height:1.04;letter-spacing:-1px}
+.hl{padding:0 14px;border-radius:18px;color:var(--on-pastel)}
+.hero p{margin:0;font-size:20px;max-width:520px}
+.ctas{display:flex;flex-wrap:wrap;gap:14px}
+.scene{flex:1 1 420px;min-width:0;position:relative;height:460px}
+.scene .em-blob{position:absolute}
+.bubbles{position:absolute;inset:0;display:flex;flex-direction:column;gap:18px;justify-content:center;padding:0 12px}
+.bubble{border:2px solid var(--line);box-shadow:0 5px 0 var(--line);padding:14px 18px;max-width:320px;color:var(--on-pastel);font-weight:600}
+.bubble small{display:block;font-size:12px;font-weight:700;opacity:.75}
+.mouse-track{position:absolute;left:20px;bottom:-6px;width:380px;max-width:calc(100% - 20px);height:40px;--run:300px}
+.em-scurry{width:88px;height:48px;margin-top:21px;animation:emRoute 14s linear infinite,emAmp 14s linear infinite}
+.em-mouse{position:relative;width:88px;height:48px;animation:emHop 14s linear infinite}
+.em-mouse span{position:absolute;inset:0;background:url(em-mouse-walk.png) 0 0/1408px 48px no-repeat;image-rendering:pixelated}
+.m-walk{opacity:var(--amp);animation:emSteps 1.8s steps(16) infinite}
+.m-idle{opacity:calc(1 - var(--amp))}
+@media (prefers-reduced-motion:reduce){.em-scurry,.em-mouse,.m-walk{animation:none}}
+
+/* ---------- Marquee ---------- */
+.strip-wrap{overflow:hidden;padding:16px 0}
+.strip{background:var(--strip-bg);color:var(--strip-fg);padding:18px 0;overflow:hidden;transform:rotate(-1.5deg);margin:0 -20px}
+.strip-track{display:flex;width:max-content;gap:36px;font-family:Fredoka,sans-serif;font-weight:600;font-size:24px;white-space:nowrap;animation:emMarquee 26s linear infinite}
+
+/* ---------- Sections ---------- */
+section{scroll-margin-top:20px}
+.sec{padding-top:112px}
+.sec-head{display:flex;flex-direction:column;gap:10px;margin-bottom:36px;max-width:640px}
+.sec-head h2{font-size:clamp(36px,4.5vw,48px);letter-spacing:-.5px;line-height:1.1}
+.sec-head p{margin:0;font-size:19px;color:var(--muted)}
+
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:24px}
+.card{border-radius:28px;padding:28px;display:flex;flex-direction:column;gap:10px;transition:transform .25s cubic-bezier(.3,1.6,.5,1)}
+.card:hover{transform:translateY(-8px) rotate(0deg) !important}
+.card h3{font-size:24px}
+.card p{margin:0;font-size:16px}
+.card a{font-weight:700;margin-top:auto;color:var(--on-pastel)}
+
+.projects{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:28px}
+.project{border-radius:32px;padding:32px;display:flex;flex-direction:column;gap:14px}
+.project-top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.project h3{font-size:30px}
+.live{display:inline-flex;align-items:center;gap:6px;background:#FFFFFF;border:2px solid #2B2140;border-radius:999px;padding:4px 12px;font-weight:700;font-size:13px}
+.live .dot{width:8px;height:8px;border-radius:4px;background:#1E7A55}
+.project p{margin:0}
+.project ul{margin:0;padding-left:20px}
+.project li{margin:4px 0}
+.project a{font-weight:700;color:var(--on-pastel)}
+
+.steps{display:flex;flex-wrap:wrap;gap:20px}
+.step{flex:1 1 260px;display:flex;gap:16px;align-items:flex-start}
+.step-num{width:52px;height:52px;flex:none;border-radius:26px;border:2px solid var(--line);display:flex;align-items:center;justify-content:center;font-family:Fredoka,sans-serif;font-weight:700;font-size:22px;color:var(--on-pastel)}
+.step h3{font-family:Nunito,sans-serif;font-size:19px}
+.step p{margin:4px 0 0}
+
+.prices{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px}
+.price{background:var(--surface);border:2px solid var(--line);border-radius:24px;padding:24px;display:flex;flex-direction:column;gap:6px}
+.price h3{font-family:Nunito,sans-serif;font-size:18px}
+.price p{margin:0;color:var(--muted);font-size:15px}
+.price .amount{font-family:Fredoka,sans-serif;font-weight:700;font-size:30px;margin-top:auto;padding-top:8px}
+.price .amount small{font-size:16px;font-weight:600}
+.price .more{align-self:flex-start;margin-top:14px;padding:10px 18px;font-size:15px}
+.pkg{border:2px solid var(--line);border-radius:24px;background:var(--surface);color:var(--ink);padding:28px;width:min(520px,calc(100vw - 32px));box-shadow:0 8px 0 var(--line)}
+.pkg::backdrop{background:rgba(17,12,29,.72)}
+.pkg h3{font-family:Fredoka,sans-serif;font-weight:700;font-size:28px;margin:0}
+.pkg .ptag{display:inline-block;margin:6px 0 12px;font-family:Fredoka,sans-serif;font-weight:700;font-size:18px;color:var(--peach)}
+.pkg .lead{margin:0 0 14px;color:var(--muted)}
+.pkg ul{margin:0 0 14px;padding-left:20px}
+.pkg li{margin:4px 0}
+.pkg .pnote{margin:0 0 20px;font-size:15px;color:var(--muted)}
+.pkg .pact{display:flex;flex-wrap:wrap;gap:12px}
+.pkg .pact .btn{padding:12px 22px;font-size:16px}
+.founding{margin-top:28px;background:var(--butter);border-radius:32px;padding:36px;display:flex;flex-wrap:wrap;gap:20px 40px;align-items:center;justify-content:space-between;transform:rotate(-.8deg)}
+.founding-text{flex:1 1 420px;display:flex;flex-direction:column;gap:10px}
+.founding .pill{align-self:flex-start;background:#FFFFFF;border:2px solid #2B2140}
+.founding .pill .dot{background:#C98A1E}
+.founding h3{font-size:32px}
+.founding p{margin:0}
+.founding .btn{background:#2B2140;color:#FFF8F2;border-color:#2B2140}
+.note{color:var(--muted);margin:24px 0 0}
+
+/* ---------- MOSS showcase ---------- */
+.moss{border-radius:36px;padding:40px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:36px;align-items:center}
+.moss-text{display:flex;flex-direction:column;gap:16px}
+.moss-text h3{font-size:clamp(30px,4vw,42px);line-height:1.1}
+.moss-text p{margin:0}
+.moss-text ul{margin:0;padding-left:20px}
+.moss-text li{margin:4px 0}
+.moss-text .pill{align-self:flex-start;background:#FFFFFF;border:2px solid var(--line)}
+.moss-ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:6px}
+.moss-ctas .btn{padding:14px 22px;font-size:16px}
+.moss-ctas .btn-dark{background:#2B2140;color:#FFF8F2;border-color:#2B2140}
+.moss-ctas .btn-white{background:#FFFFFF;color:#2B2140}
+.moss-shots{position:relative;display:flex;flex-direction:column;gap:14px}
+.moss-shots img{display:block;width:100%;height:auto;border:2px solid var(--line);border-radius:18px;box-shadow:0 5px 0 var(--line);background:#FFFFFF}
+.moss-shots .s1{transform:rotate(-1.5deg);width:88%}
+.moss-shots .s2{transform:rotate(1.2deg);width:88%;align-self:flex-end}
+.moss-snails{display:flex;align-items:center;gap:14px;background:#FFFFFF;border:2px solid var(--line);border-radius:18px;box-shadow:0 5px 0 var(--line);padding:10px 14px}
+.moss-snails img{flex:1 1 0;min-width:0;max-width:340px;border:0;box-shadow:none;border-radius:0;image-rendering:pixelated}
+.moss-snails span{flex:none;font-family:Fredoka,sans-serif;font-weight:600;font-size:15px;line-height:1.2;color:#2B2140}
+.moss-note{margin:22px 0 0;color:var(--muted)}
+@media (max-width:860px){.moss{grid-template-columns:1fr;padding:28px 22px}}
+@media (max-width:560px){.moss-snails{flex-direction:column;align-items:flex-start;gap:6px}.moss-snails img{flex:none;width:100%}}
+
+/* ---------- Contact ---------- */
+.hello{position:relative;background:var(--lav);border-radius:40px;padding:64px 48px;overflow:hidden}
+.hello .em-blob{position:absolute}
+.hello-inner{position:relative;display:flex;flex-wrap:wrap;gap:40px;align-items:flex-start}
+.hello-text{flex:1 1 340px;display:flex;flex-direction:column;gap:18px}
+.hello-text h2{font-size:clamp(36px,4.5vw,56px);line-height:1.1}
+.hello-text p{margin:0;font-size:18px}
+.hello-text a{font-weight:700;color:var(--on-pastel)}
+.about{background:#FFFFFF;border:2px solid #2B2140;border-radius:24px;padding:20px 22px;transform:rotate(-1.2deg)}
+.about h3{font-size:22px;margin-bottom:6px}
+.about p{font-size:16px}
+.form-card{flex:1 1 400px;background:#FFFFFF;border:2px solid #2B2140;border-radius:28px;padding:28px;box-shadow:0 6px 0 #2B2140;color:#2B2140}
+.form{display:grid;gap:14px}
+.form label{display:block;font-size:15px;font-weight:700;margin-bottom:6px}
+.form input,.form select,.form textarea{width:100%;font:inherit;font-size:16px;color:#2B2140;background:#FFF8F2;border:2px solid #2B2140;border-radius:999px;padding:12px 16px}
+.form textarea{border-radius:20px;resize:vertical;min-height:120px}
+.form input:focus,.form textarea:focus{outline:3px solid #DCCBFF;outline-offset:2px}
+.form button[type=submit]{width:100%;background:#2B2140;color:#FFF8F2;border-color:#2B2140}
+.fine{font-size:13px;color:#5B4D78;margin:0}
+.fine a{color:#2B2140}
+.pick{position:relative}
+.pick select{position:absolute;inset:0;opacity:0;pointer-events:none}
+.form .pick-btn{width:100%;display:flex;align-items:center;justify-content:space-between;gap:10px;text-align:left;font:inherit;font-size:16px;color:#2B2140;background:#FFF8F2;border:2px solid #2B2140;border-radius:999px;padding:12px 16px;cursor:pointer}
+.form .pick-btn:focus-visible,.pick.open .pick-btn{outline:3px solid #DCCBFF;outline-offset:2px}
+.pick-btn svg{flex:none;transition:transform .2s}
+.pick.open .pick-btn svg{transform:rotate(180deg)}
+.pick-list{position:absolute;left:0;right:0;top:calc(100% + 6px);z-index:20;margin:0;padding:6px;list-style:none;background:#FFFFFF;border:2px solid #2B2140;border-radius:20px;box-shadow:0 5px 0 #2B2140}
+.pick-list[hidden]{display:none}
+.pick-list li{padding:10px 14px;border-radius:14px;cursor:pointer;font-size:16px}
+.pick-list li.active{background:#DCCBFF}
+.pick-list li[aria-selected="true"]{font-weight:700}
+
+.social{width:48px;height:48px;border-radius:24px;border:2px solid #2B2140;box-shadow:0 4px 0 #2B2140;display:inline-flex;align-items:center;justify-content:center;color:#2B2140}
+.social:hover{color:#2B2140}
+.social svg{width:22px;height:22px}
+.socials{display:flex;flex-wrap:wrap;gap:12px}
+footer .social{border-color:var(--line);box-shadow:0 4px 0 var(--line)}
+footer{display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;align-items:center;padding:48px 0 40px;font-size:15px;color:var(--muted)}
+footer .logo{font-size:20px;color:var(--ink)}
+
+/* ---------- Scrollbar ---------- */
+::-webkit-scrollbar{width:12px;height:12px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--lav);border-radius:999px;border:3px solid var(--bg)}
+::-webkit-scrollbar-thumb:hover{background:var(--pink)}
+@supports not selector(::-webkit-scrollbar){html{scrollbar-color:var(--lav) var(--bg);scrollbar-width:thin}}
+
+/* ---------- Phones ---------- */
+@media (max-width:640px){
+  body{font-size:16px}
+  .hero{padding:40px 0 56px;gap:32px}
+  .hero p{font-size:18px}
+  .scene{height:400px}
+  .bubble{max-width:260px;font-size:15px}
+  .mouse-track{--run:180px}
+  .sec{padding-top:80px}
+  .hello{padding:40px 22px;border-radius:32px}
+  .founding{padding:26px;transform:none}
+  .project{padding:24px}
+  .form-card{padding:22px}
+  .nav-links a:not(.btn-dark){padding:8px 10px}
+}
+/* Cursor: lilac arrow, and a little mouse over anything clickable */
+@media (pointer:fine){
+  html{cursor:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2228%22 height=%2228%22 viewBox=%220 0 28 28%22%3E%3Cpath d=%22M5 3v18.5l4.8-4.6 3.4 7.4 3.4-1.5-3.3-7.2h6.6z%22 fill=%22%23DCCBFF%22 stroke=%22%232B2140%22 stroke-width=%222%22 stroke-linejoin=%22round%22/%3E%3C/svg%3E") 5 3, auto}
+  a,button,label,select,.btn,.social,.pick-btn,.pick-list li{cursor:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2232%22 height=%2232%22 viewBox=%220 0 32 32%22%3E%3Ccircle cx=%229%22 cy=%229%22 r=%225.5%22 fill=%22%23FFC6DA%22 stroke=%22%232B2140%22 stroke-width=%222%22/%3E%3Ccircle cx=%2223%22 cy=%229%22 r=%225.5%22 fill=%22%23FFC6DA%22 stroke=%22%232B2140%22 stroke-width=%222%22/%3E%3Cellipse cx=%2216%22 cy=%2218%22 rx=%2210%22 ry=%229%22 fill=%22%23DCCBFF%22 stroke=%22%232B2140%22 stroke-width=%222%22/%3E%3Ccircle cx=%2212.5%22 cy=%2217%22 r=%221.4%22 fill=%22%232B2140%22/%3E%3Ccircle cx=%2219.5%22 cy=%2217%22 r=%221.4%22 fill=%22%232B2140%22/%3E%3Ccircle cx=%2216%22 cy=%2221.5%22 r=%221.6%22 fill=%22%23FFC6DA%22 stroke=%22%232B2140%22 stroke-width=%221.2%22/%3E%3C/svg%3E") 16 16, pointer}
+  input,textarea{cursor:text}
+}
+</style>
+<style>
+.sec-head h1{font-size:clamp(36px,5vw,56px);line-height:1.08;letter-spacing:-1px}
+.faq h3{margin:22px 0 6px}
+.faq p{margin:0}
+.sub-list{margin:0;padding-left:20px;line-height:1.8}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav class="nav" aria-label="Main">
+    <a href="index.html" class="logo"><span class="logo-dot em-float" aria-hidden="true"></span>emcoda</a>
+    <div class="nav-links">
+      <a href="index.html#work">Work</a>
+      <a href="index.html#moss">MOSS</a>
+      <a href="index.html#pricing">Pricing</a>
+      <a class="btn btn-dark em-btn" href="index.html#hello">Get a free quote</a>
+    </div>
+  </nav>
+
+  <section id="top" class="sec">
+    <div class="sec-head">
+      <h1>A Discord welcome and rank card bot with your branding</h1>
+      <p>Your own bot, with its own name and avatar, greeting every new member with a welcome card in your colours and showing off levels with rank cards that match your community. Built, hosted and looked after by me, a developer based in England.</p>
+    </div>
+  </section>
+
+  <section id="get" class="sec">
+    <div class="sec-head">
+      <h2>What you get</h2>
+      <p>The things free bots can't give you.</p>
+    </div>
+    <article class="moss sticker" style="background:var(--mint)">
+      <div class="moss-text">
+        <h3>Your bot, not someone else's.</h3>
+        <ul>
+          <li>A bot with your own name and avatar, not a big bot's logo</li>
+          <li>Welcome cards designed in your colours, fonts and style</li>
+          <li>Rank cards, XP and levels, with role rewards</li>
+          <li>Extra commands or features shaped around your community</li>
+          <li>Hosting and care, so it stays online and you never touch a server</li>
+        </ul>
+      </div>
+      <div class="moss-shots">
+        <img class="s1" src="moss/welcome-card.png" alt="Example welcome card made by an Emcoda bot" loading="lazy" width="1000" height="380">
+        <img class="s2" src="moss/rank-card-custom.png" alt="Example custom rank card made by an Emcoda bot" loading="lazy" width="880" height="334">
+      </div>
+    </article>
+    <p class="moss-note">These cards come from MOSS, my free bot. Yours gets your own look, your own name and your own rules.</p>
+  </section>
+
+  <section id="pricing" class="sec">
+    <div class="sec-head">
+      <h2>Packages</h2>
+      <p>Starting prices. You'll get a fixed quote before anything begins.</p>
+    </div>
+    <div class="prices">
+      <div class="price"><h3>Branded welcome bot</h3><p>Your own bot with its own name and avatar, plus a welcome card in your colours. About 3 days.</p><div class="amount">from £79</div></div>
+      <div class="price"><h3>Welcome + rank cards</h3><p>Welcome and rank cards in your style, XP, levels and role rewards. About a week.</p><div class="amount">from £180</div></div>
+      <div class="price"><h3>Bot + web dashboard</h3><p>Everything above, plus a page where you change settings by logging in with Discord.</p><div class="amount">from £500</div></div>
+      <div class="price"><h3>Hosting &amp; care</h3><p>Hosting, fixes and small updates</p><div class="amount">from £25 <small>/ month</small></div></div>
+    </div>
+  </section>
+
+  <section id="faq" class="sec faq">
+    <div class="sec-head">
+      <h2>Questions</h2>
+    </div>
+    <h3>Why not just use a free bot?</h3>
+    <p>Free bots are great for the basics, but every server ends up looking the same, and the bot carries their name. A bot made for you has your name, your avatar and cards designed for your community.</p>
+    <h3>Who is this for?</h3>
+    <p>Creators and gaming communities who want their Discord to feel like their own place: streamers, YouTubers, game clans and fan servers.</p>
+    <h3>Do I need to host it myself?</h3>
+    <p>No. I can host it and keep it running from £25 a month, including fixes and small updates.</p>
+    <h3>How do we start?</h3>
+    <p>Tell me about your server and the look you like. You get a fixed quote, usually within a day, before any work begins.</p>
+    <p style="margin-top:28px"><a class="btn btn-peach em-btn" href="index.html#hello">Get a free quote</a></p>
+  </section>
+
+  <footer>
+    <span class="logo"><span class="logo-dot" aria-hidden="true"></span>emcoda</span>
+    <div class="socials">
+      <a class="social em-btn" href="https://www.instagram.com/emcoda.bot/" target="_blank" rel="noopener" aria-label="Emcoda on Instagram" style="background:var(--pink)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+      <a class="social em-btn" href="https://www.tiktok.com/@emcoda.bot" target="_blank" rel="noopener" aria-label="Emcoda on TikTok" style="background:var(--mint)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3v11.5a3.5 3.5 0 1 1-3.5-3.5"/><path d="M14 3c.5 2.5 2.5 4.5 5 4.5"/></svg></a>
+      <a class="social em-btn" href="https://x.com/emaennooo" target="_blank" rel="noopener" aria-label="Ema on X" style="background:var(--lav)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M5 4l14 16M19 4L5 20"/></svg></a>
+      <a class="social em-btn" href="https://www.facebook.com/profile.php?id=61595632763866" target="_blank" rel="noopener" aria-label="Emcoda on Facebook" style="background:var(--peach)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 3h-2a4 4 0 0 0-4 4v14M6 11h8"/></svg></a>
+    </div>
+    <span>Made with care in England · © 2026 Emcoda · <a href="privacy.html">Privacy</a></span>
+  </footer>
+</div>
+<script>
+/* Scroll reveal: each card/heading slides in once, a little after its neighbour */
+(function(){
+  var d=document.documentElement;d.classList.add('js');
+  var els=[].slice.call(document.querySelectorAll('.sec h2, .sec .sticker, .sec .lede, .sec p.sub, .sec img, #hello form'));
+  if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('in')});return;}
+  var io=new IntersectionObserver(function(en){en.forEach(function(x){if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target);}});},{threshold:.12,rootMargin:'0px 0px -6% 0px'});
+  els.forEach(function(e){
+    e.classList.add('rv');
+    var sib=e.parentNode?[].indexOf.call(e.parentNode.children,e):0;
+    e.style.setProperty('--d',(Math.min(sib,5)*0.09)+'s');
+    io.observe(e);
+  });
+})();
+</script>
+<script>(function(){try{if(navigator.doNotTrack==="1")return;var r="";try{r=document.referrer?new URL(document.referrer).hostname:""}catch(e){}var u=(new URLSearchParams(location.search)).get("utm_source")||"";new Image().src="https://stats.emcoda.com/hit?s=emcoda&p="+encodeURIComponent(location.pathname)+"&r="+encodeURIComponent(r)+"&u="+encodeURIComponent(u)+"&t="+Date.now()}catch(e){}})();</script>
+</body>
+</html>
