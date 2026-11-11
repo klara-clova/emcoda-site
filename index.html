@@ -276,6 +276,7 @@ footer .logo{font-size:20px;color:var(--ink)}
     <div class="nav-links">
       <a href="#build">What I build</a>
       <a href="#work">Work</a>
+      <a href="#websites">Websites</a>
       <a href="#how">How it works</a>
       <a href="#pricing">Pricing</a>
       <a class="btn btn-dark em-btn" href="#hello">Say hi</a>
@@ -395,6 +396,26 @@ footer .logo{font-size:20px;color:var(--ink)}
     <p class="moss-note">MOSS is free for everyone. A bot made just for your community works the same way, only it's yours: your look, your features, your rules.</p>
   </section>
 
+  <section id="websites" class="sec">
+    <div class="sec-head">
+      <h2>Websites for small businesses</h2>
+      <p>A friendly, fast website for your shop, studio or service, built so everyone can use it, including blind and partially sighted visitors.</p>
+    </div>
+    <div class="cards">
+      <div class="card sticker" style="background:var(--lav);transform:rotate(-1.5deg)"><h3>Made for everyone</h3><p>Every photo gets a real description, so a screen reader says "chocolate cake with fresh raspberries, £35" instead of just "image".</p></div>
+      <div class="card sticker" style="background:var(--mint);transform:rotate(1deg)"><h3>Easy for Google to read</h3><p>Clear page titles, descriptions and fast loading: the basics many small business sites skip.</p></div>
+      <div class="card sticker" style="background:var(--peach);transform:rotate(-1deg)"><h3>Looked after for you</h3><p>Hosting, fixes and small changes, so you never have to touch the code yourself.</p></div>
+    </div>
+    <p class="moss-note" style="margin:22px 0 26px">Why I care: I built PixelRoom, an AI helper that describes images for blind and visually impaired people. Every website I make gets the same care.</p>
+    <div class="prices">
+      <div class="price"><h3>One-page website</h3><p>Everything a small business needs on one friendly page</p><div class="amount">from £349</div><button type="button" class="btn btn-white more" data-pkg="pkg-web-one" aria-haspopup="dialog">What's included</button></div>
+      <div class="price"><h3>Small business website</h3><p>Up to 5 pages, for when you have more to show</p><div class="amount">from £749</div><button type="button" class="btn btn-white more" data-pkg="pkg-web-small" aria-haspopup="dialog">What's included</button></div>
+      <div class="price"><h3>Accessibility fix</h3><p>Make the website you already have easier for everyone to use</p><div class="amount">from £149</div><button type="button" class="btn btn-white more" data-pkg="pkg-web-a11y" aria-haspopup="dialog">What's included</button></div>
+      <div class="price"><h3>Website care</h3><p>Hosting, fixes and small updates</p><div class="amount">from £20 <small>/ month</small></div><button type="button" class="btn btn-white more" data-pkg="pkg-web-care" aria-haspopup="dialog">What's included</button></div>
+    </div>
+    <p class="note">The founding spots below count for websites too: 30% off for my first three clients. <a href="#hello">Ask about a website</a></p>
+  </section>
+
   <section id="how" class="sec">
     <div class="sec-head">
       <h2>How it works</h2>
@@ -461,10 +482,12 @@ footer .logo{font-size:20px;color:var(--ink)}
                 <option>Welcome + rank cards</option>
                 <option>Bot + web dashboard</option>
                 <option>Hosting &amp; care</option>
+                <option>A website for my business</option>
+                <option>An accessibility fix for my website</option>
                 <option>Something else or not sure yet</option>
               </select>
             </div>
-            <div><label for="f-msg">About your community</label><textarea id="f-msg" name="message" placeholder="What's your server about, and what would you love it to do?" required></textarea></div>
+            <div><label for="f-msg">About your project</label><textarea id="f-msg" name="message" placeholder="Tell me about your server or business, and what you would love it to do." required></textarea></div>
             <input type="hidden" name="_subject" value="New enquiry from the website">
             <button type="submit" class="btn em-btn">Send message</button>
             <p class="fine">Your message is delivered to me through Formspree. I only use your details to reply to you. <a href="privacy.html">Privacy notice</a></p>
@@ -489,6 +512,10 @@ footer .logo{font-size:20px;color:var(--ink)}
 <dialog id="pkg-welcome" class="pkg" aria-labelledby="pkg-welcome-t"><h3 id="pkg-welcome-t">Branded welcome bot</h3><span class="ptag">from £79</span><p class="lead">A bot of your own that greets every new member with a welcome card in your colours, ready in 3 days.</p><ul><li>Your own bot, with its own name and avatar</li><li>One welcome card designed in your colours and style</li><li>Set up and tested in your server</li><li>One round of changes</li><li>14 days of free bug fixes</li></ul><p class="pnote">Want rank cards and levels too? See Welcome + rank cards. Hosting is separate: see Hosting &amp; care.</p><div class="pact"><a class="btn btn-peach" href="#hello" data-close>Ask about this</a><button type="button" class="btn btn-white" data-close>Close</button></div></dialog>
 <dialog id="pkg-cards" class="pkg" aria-labelledby="pkg-cards-t"><h3 id="pkg-cards-t">Welcome + rank cards</h3><span class="ptag">from £180</span><p class="lead">Cards and levels that make your server feel like yours.</p><ul><li>Everything in Branded welcome bot</li><li>Rank cards in your style</li><li>XP and levels, with role rewards</li><li>Up to 5 extra commands or features you choose, agreed together first</li><li>You get a fixed quote before I start</li><li>2 rounds of changes after handover</li><li>14 days of free bug fixes</li><li>Usually ready in about a week</li><li>Source code is available as an extra</li></ul><p class="pnote">Anything beyond this is quoted separately. Hosting is separate: see Hosting &amp; care.</p><div class="pact"><a class="btn btn-peach" href="#hello" data-close>Ask about this</a><button type="button" class="btn btn-white" data-close>Close</button></div></dialog>
 <dialog id="pkg-dash" class="pkg" aria-labelledby="pkg-dash-t"><h3 id="pkg-dash-t">Bot + web dashboard</h3><span class="ptag">from £500</span><p class="lead">Your bot plus a web page where you manage it, instead of typing commands.</p><ul><li>Log in with Discord, no new passwords</li><li>Change settings and messages in simple forms</li><li>The bot itself is included: up to 10 commands or features you choose, built to a fixed quote</li><li>Dashboard with up to 3 panels and 1 external API connection (for example Twitch, YouTube or Stripe)</li><li>2 rounds of changes after handover</li><li>14 days of free bug fixes</li><li>Usually ready in about a week or more, depending on the features</li><li>Server setup included: channels, roles and rules, set up for you</li></ul><p class="pnote">Anything beyond this is quoted separately. Hosting is separate: see Hosting &amp; care.</p><div class="pact"><a class="btn btn-peach" href="#hello" data-close>Ask about this</a><button type="button" class="btn btn-white" data-close>Close</button></div></dialog>
+<dialog id="pkg-web-one" class="pkg" aria-labelledby="pkg-web-one-t"><h3 id="pkg-web-one-t">One-page website</h3><span class="ptag">from £349</span><p class="lead">One friendly page that tells people who you are, what you offer and how to reach you.</p><ul><li>Your own design in your colours, works on phones and computers</li><li>Sections you choose, for example about, services, prices, photos, opening hours, map</li><li>A contact form that sends enquiries to your email</li><li>A written description for every photo, so screen readers can read them aloud</li><li>Page title, description and link preview set up for Google and social media</li><li>Connected to your own domain name</li><li>One round of changes</li><li>14 days of free bug fixes</li></ul><p class="pnote">The domain name is yours and paid separately. Hosting is separate: see Website care.</p><div class="pact"><a class="btn btn-peach" href="#hello" data-close>Ask about this</a><button type="button" class="btn btn-white" data-close>Close</button></div></dialog>
+<dialog id="pkg-web-small" class="pkg" aria-labelledby="pkg-web-small-t"><h3 id="pkg-web-small-t">Small business website</h3><span class="ptag">from £749</span><p class="lead">A website with room to grow, for when one page isn't enough.</p><ul><li>Everything in One-page website</li><li>Up to 5 pages, for example home, services, gallery, about, contact</li><li>Checked against the main accessibility guidelines (WCAG 2.2 AA): headings, contrast, keyboard use and image descriptions</li><li>A sitemap and setup in Google Search Console</li><li>You get a fixed quote before I start</li><li>2 rounds of changes</li><li>14 days of free bug fixes</li></ul><p class="pnote">Online shops, bookings and logins are quoted separately. Hosting is separate: see Website care.</p><div class="pact"><a class="btn btn-peach" href="#hello" data-close>Ask about this</a><button type="button" class="btn btn-white" data-close>Close</button></div></dialog>
+<dialog id="pkg-web-a11y" class="pkg" aria-labelledby="pkg-web-a11y-t"><h3 id="pkg-web-a11y-t">Accessibility fix</h3><span class="ptag">from £149</span><p class="lead">For the website you already have. I check it and fix the things that stop people from using it.</p><ul><li>A plain-English report of what blocks visitors, from most to least important</li><li>A written description for every image, made with the same care as PixelRoom</li><li>Fixes for missing labels, headings and low-contrast text, where your website allows it</li><li>Before and after check</li></ul><p class="pnote">The price depends on the size of the website and the system it runs on. You get a fixed quote first.</p><div class="pact"><a class="btn btn-peach" href="#hello" data-close>Ask about this</a><button type="button" class="btn btn-white" data-close>Close</button></div></dialog>
+<dialog id="pkg-web-care" class="pkg" aria-labelledby="pkg-web-care-t"><h3 id="pkg-web-care-t">Website care</h3><span class="ptag">from £20 / month</span><p class="lead">Keeps your website online and up to date, so you don't have to.</p><ul><li>Hosting, so your website stays online</li><li>Fixes when something breaks</li><li>Small text and photo updates, with a description for every new photo</li></ul><p class="pnote">Bigger changes are quoted separately.</p><div class="pact"><a class="btn btn-peach" href="#hello" data-close>Ask about this</a><button type="button" class="btn btn-white" data-close>Close</button></div></dialog>
 <dialog id="pkg-care" class="pkg" aria-labelledby="pkg-care-t"><h3 id="pkg-care-t">Hosting &amp; care</h3><span class="ptag">from £25 / month</span><p class="lead">Keeps your bot running so you don't have to.</p><ul><li>Hosting, so your bot stays online</li><li>Fixes when something breaks</li><li>Small updates and tweaks</li></ul><p class="pnote">Bigger changes are quoted separately. Building your bot is a one-time package, so it is not part of the monthly plan.</p><div class="pact"><a class="btn btn-peach" href="#hello" data-close>Ask about this</a><button type="button" class="btn btn-white" data-close>Close</button></div></dialog>
 <script>
 (function(){
