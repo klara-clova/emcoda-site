@@ -16,94 +16,101 @@
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:1.125rem;line-height:1.6}
-a{color:var(--brand)}
+a{color:var(--brand);text-underline-offset:5px}
 a:hover{text-decoration-thickness:3px}
 :focus-visible{outline:3px solid var(--brand);outline-offset:3px;border-radius:4px}
 .skip{position:absolute;left:12px;top:-60px;background:var(--brand);color:var(--white);padding:12px 18px;border-radius:8px;z-index:10;font-weight:700}
 .skip:focus{top:12px}
 .wrap{max-width:1080px;margin:0 auto;padding:0 24px}
-h1,h2,h3{font-family:var(--serif);line-height:1.2;margin:0 0 .5em}
-h1{font-size:clamp(2.2rem,6vw,3.6rem)}
-h2{font-size:clamp(1.7rem,4vw,2.3rem)}
-h3{font-size:1.35rem}
+h1,h2,h3{font-family:var(--serif);line-height:1.1;margin:0 0 .5em}
+h1{font-size:clamp(2.6rem,7vw,4.6rem);font-weight:700;letter-spacing:-.02em}
+h2{font-size:clamp(1.8rem,4vw,2.4rem)}
+h3{font-size:1.3rem}
 p{margin:0 0 1em}
-.sample{background:var(--ink);color:var(--bg);font-size:1rem;padding:12px 0}
+.eyebrow{font-weight:700;letter-spacing:.12em;text-transform:uppercase;font-size:.85rem;color:var(--brand);margin:0 0 14px}
+.sample{background:var(--ink);color:var(--bg);font-size:.95rem;padding:10px 0}
 .sample a{color:var(--bg);font-weight:700}
 .site{padding:20px 0}
 .bar{display:flex;flex-wrap:wrap;gap:12px 28px;align-items:center;justify-content:space-between}
-.brand{font-family:var(--serif);font-weight:700;font-size:1.6rem;color:var(--brand);text-decoration:none}
-nav ul{display:flex;flex-wrap:wrap;gap:6px 22px;list-style:none;margin:0;padding:0}
-nav a{display:inline-block;padding:10px 4px;font-weight:600;color:var(--ink);text-underline-offset:5px}
-nav a[aria-current="page"]{text-decoration:underline;text-decoration-thickness:3px}
-.hero{background:var(--sand);padding:56px 0}
-.hero-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:40px;align-items:center}
-.hero p{font-size:1.25rem;max-width:34rem}
-.btn{display:inline-block;background:var(--brand);color:var(--white);padding:14px 26px;border-radius:999px;font-weight:700;text-decoration:none;min-height:48px}
+.brand{font-family:var(--serif);font-weight:700;font-size:1.7rem;color:var(--brand);text-decoration:none}
+nav ul{display:flex;flex-wrap:wrap;gap:6px 22px;align-items:center;list-style:none;margin:0;padding:0}
+nav a{display:inline-block;padding:10px 4px;font-weight:600;color:var(--ink)}
+nav a.btn{color:var(--white);padding:10px 20px}
+.btn{display:inline-block;background:var(--brand);color:var(--white);padding:15px 28px;border-radius:999px;font-weight:700;text-decoration:none;min-height:48px}
 .btn:hover{background:var(--ink);color:var(--white)}
-.art{width:100%;height:auto;display:block;border-radius:20px;background:var(--white)}
+.hero{padding:40px 0 56px}
+.hero-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:48px;align-items:center}
+.hero p.lead{font-size:1.25rem;color:var(--muted);max-width:32rem}
+.actions{display:flex;flex-wrap:wrap;gap:16px;align-items:center}
+.arch{background:var(--sand);border-radius:220px 220px 24px 24px;overflow:hidden;aspect-ratio:400/440}
+.arch svg{display:block;width:100%;height:100%}
 section{padding:56px 0}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:24px;list-style:none;margin:0;padding:0}
-.card{background:var(--white);border:2px solid var(--ink);border-radius:20px;padding:16px;height:100%}
-.card .art{margin-bottom:14px}
+.menu{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:28px;list-style:none;margin:0;padding:0}
+.item{border-top:3px solid var(--ink);padding-top:14px}
+.item svg{display:block;width:100%;height:auto;border-radius:16px;background:var(--sand);margin-bottom:14px}
+.item h3{margin:0 0 6px}
+.item p{margin:0 0 6px;color:var(--muted)}
 .price{font-weight:700;color:var(--brand)}
-.hours{border-collapse:collapse;width:100%;max-width:440px}
-.hours th,.hours td{text-align:left;padding:10px 8px;border-bottom:2px solid var(--sand)}
 .alt{background:var(--sand)}
+.hours{border-collapse:collapse;width:100%;max-width:460px}
+.hours th,.hours td{text-align:left;padding:10px 8px;border-bottom:2px solid var(--bg)}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .alt ul{margin:0;padding-left:1.2em}
 .alt li{margin:.4em 0}
 footer{background:var(--ink);color:var(--bg);padding:36px 0;font-size:1rem}
 footer a{color:var(--bg)}
-@media (max-width:760px){.hero-grid{grid-template-columns:1fr}.hero{padding:36px 0}section{padding:40px 0}}
+@media (max-width:820px){.hero-grid{grid-template-columns:1fr}.arch{max-width:420px;border-radius:200px 200px 24px 24px}section{padding:40px 0}}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 </style>
 </head>
 <body>
 <a class="skip" href="#main">Skip to main content</a>
 
-
-
-<header class="site-top">
-<div class="sample" role="note">
-  <div class="wrap">This is a sample design by <a href="../../web-designer-sutton.html">Emcoda</a>. Little Rye Bakery is a fictional business. Prices, hours and details are made up.</div>
-</div>
-<div class="site">
-  <div class="wrap bar">
-    <a class="brand" href="#top">Little Rye Bakery</a>
-    <nav aria-label="Main">
-      <ul>
-        <li><a href="#bakes">Today's bakes</a></li>
-        <li><a href="#visit">Opening hours</a></li>
-        <li><a href="#about">About us</a></li>
-        <li><a href="#access">Accessibility</a></li>
-      </ul>
-    </nav>
+<header>
+  <div class="sample" role="note">
+    <div class="wrap">This is a sample design by <a href="../../web-designer-sutton.html">Emcoda</a>. Little Rye Bakery is a fictional business. Prices, hours and details are made up.</div>
   </div>
-</div>
+  <div class="site">
+    <div class="wrap bar">
+      <a class="brand" href="#top">Little Rye</a>
+      <nav aria-label="Main">
+        <ul>
+          <li><a href="#bakes">Today's bakes</a></li>
+          <li><a href="#visit">Opening hours</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#access">Accessibility</a></li>
+          <li><a class="btn" href="#visit">Order a cake</a></li>
+        </ul>
+      </nav>
+    </div>
+  </div>
 </header>
 
 <main id="main">
   <div class="hero" id="top">
     <div class="wrap hero-grid">
       <div>
-        <h1>Small-batch bread and cakes, baked every morning</h1>
-        <p>Sourdough, pastries and celebration cakes made in small batches with local flour. Order ahead for collection, or drop in before they sell out.</p>
-        <p><a class="btn" href="#visit">See opening hours</a></p>
+        <p class="eyebrow">Baked every morning</p>
+        <h1>Bread with a good crust.</h1>
+        <p class="lead">Small-batch sourdough, pastries and celebration cakes, made with local flour in the heart of the neighbourhood.</p>
+        <div class="actions">
+          <a class="btn" href="#bakes">See today's bakes</a>
+          <a href="#visit">Opening hours</a>
+        </div>
       </div>
-      <svg class="art" viewBox="0 0 400 300" role="img" aria-labelledby="hero-t hero-d">
-        <title id="hero-t">A basket of fresh bread</title>
-        <desc id="hero-d">A wicker basket on a wooden table holding two round brown sourdough loaves with white flour dusting and a long baguette lying across the top.</desc>
-        <rect width="400" height="300" fill="#FFFFFF"/>
-        <rect y="230" width="400" height="70" fill="#C98A4B"/>
-        <ellipse cx="200" cy="232" rx="150" ry="14" fill="#A5693A"/>
-        <path d="M70 140h260l-22 92H92z" fill="#B7793F"/>
-        <path d="M80 165h240M86 190h228M92 213h216" stroke="#8A5427" stroke-width="5" fill="none"/>
-        <ellipse cx="140" cy="135" rx="62" ry="44" fill="#C47A32"/>
-        <path d="M105 125q35-25 70 0M110 145q30-15 60 0" stroke="#FFF1DC" stroke-width="5" fill="none" stroke-linecap="round"/>
-        <ellipse cx="262" cy="135" rx="62" ry="44" fill="#B96B27"/>
-        <path d="M228 125q34-25 68 0M232 145q30-15 60 0" stroke="#FFF1DC" stroke-width="5" fill="none" stroke-linecap="round"/>
-        <rect x="90" y="70" width="230" height="30" rx="15" transform="rotate(-12 205 85)" fill="#D79A4F"/>
-        <path d="M120 88l20 8M160 80l20 8M200 72l20 8M240 64l20 8" stroke="#8A5427" stroke-width="4" stroke-linecap="round"/>
-      </svg>
+      <div class="arch">
+        <svg viewBox="0 0 400 440" role="img" aria-labelledby="hero-t hero-d">
+          <title id="hero-t">A basket of fresh bread</title>
+          <desc id="hero-d">A wicker basket on a wooden table holding two round brown sourdough loaves with white flour dusting and a long baguette lying across the top.</desc>
+          <rect y="320" width="400" height="120" fill="#C98A4B"/>
+          <path d="M70 200h260l-22 120H92z" fill="#B7793F"/>
+          <path d="M80 235h240M86 268h228M92 298h216" stroke="#8A5427" stroke-width="5" fill="none"/>
+          <ellipse cx="140" cy="195" rx="64" ry="46" fill="#C47A32"/><path d="M104 185q36-26 72 0" stroke="#FFF1DC" stroke-width="5" fill="none" stroke-linecap="round"/>
+          <ellipse cx="262" cy="195" rx="64" ry="46" fill="#B96B27"/><path d="M226 185q36-26 72 0" stroke="#FFF1DC" stroke-width="5" fill="none" stroke-linecap="round"/>
+          <rect x="90" y="130" width="230" height="30" rx="15" transform="rotate(-12 205 145)" fill="#D79A4F"/>
+          <path d="M120 148l20 8M160 140l20 8M200 132l20 8M240 124l20 8" stroke="#8A5427" stroke-width="4" stroke-linecap="round"/>
+        </svg>
+      </div>
     </div>
   </div>
 
@@ -111,12 +118,11 @@ footer a{color:var(--bg)}
     <div class="wrap">
       <h2 id="bakes-h">Today's bakes</h2>
       <p>Every picture on this page has a written description, so a screen reader can tell you what it shows.</p>
-      <ul class="grid">
-        <li class="card">
-          <svg class="art" viewBox="0 0 300 220" role="img" aria-labelledby="c1-t c1-d">
+      <ul class="menu">
+        <li class="item">
+          <svg viewBox="0 0 300 220" role="img" aria-labelledby="c1-t c1-d">
             <title id="c1-t">Chocolate cake with fresh raspberries</title>
             <desc id="c1-d">A round chocolate cake with a thick glossy dark icing and six red raspberries arranged in a circle on top, on a white plate.</desc>
-            <rect width="300" height="220" fill="#FFF3E2"/>
             <ellipse cx="150" cy="180" rx="120" ry="18" fill="#FFFFFF" stroke="#D8C2A2" stroke-width="3"/>
             <path d="M70 110h160v62q-80 22-160 0z" fill="#5A2E1A"/>
             <ellipse cx="150" cy="110" rx="80" ry="22" fill="#3E1F10"/>
@@ -127,11 +133,10 @@ footer a{color:var(--bg)}
           <p>Dark chocolate sponge with fresh raspberries. Serves 8.</p>
           <p class="price">£35</p>
         </li>
-        <li class="card">
-          <svg class="art" viewBox="0 0 300 220" role="img" aria-labelledby="c2-t c2-d">
+        <li class="item">
+          <svg viewBox="0 0 300 220" role="img" aria-labelledby="c2-t c2-d">
             <title id="c2-t">Round sourdough loaf</title>
             <desc id="c2-d">A round golden-brown sourdough loaf with a deep curved cut across the top and a light dusting of flour, on a wooden board.</desc>
-            <rect width="300" height="220" fill="#FFF3E2"/>
             <rect x="30" y="160" width="240" height="26" rx="8" fill="#B7793F"/>
             <ellipse cx="150" cy="110" rx="100" ry="62" fill="#C47A32"/>
             <path d="M95 85q55-35 110 0" stroke="#FFF1DC" stroke-width="9" fill="none" stroke-linecap="round"/>
@@ -141,11 +146,10 @@ footer a{color:var(--bg)}
           <p>Slow-risen for 24 hours, with a crisp crust.</p>
           <p class="price">£4.50</p>
         </li>
-        <li class="card">
-          <svg class="art" viewBox="0 0 300 220" role="img" aria-labelledby="c3-t c3-d">
+        <li class="item">
+          <svg viewBox="0 0 300 220" role="img" aria-labelledby="c3-t c3-d">
             <title id="c3-t">Butter croissant</title>
             <desc id="c3-d">A single golden croissant shaped like a crescent, with visible layered ridges, on a white plate.</desc>
-            <rect width="300" height="220" fill="#FFF3E2"/>
             <ellipse cx="150" cy="170" rx="110" ry="16" fill="#FFFFFF" stroke="#D8C2A2" stroke-width="3"/>
             <path d="M40 150q20-90 110-90t110 90q-30-20-60-18-20-30-50-30t-50 30q-30-2-60 18z" fill="#E0A04A"/>
             <path d="M95 82l15 50M130 68l8 60M170 68l-8 60M205 82l-15 50" stroke="#B7742A" stroke-width="5" stroke-linecap="round"/>
@@ -154,11 +158,10 @@ footer a{color:var(--bg)}
           <p>Flaky layers, baked fresh each morning.</p>
           <p class="price">£2.80</p>
         </li>
-        <li class="card">
-          <svg class="art" viewBox="0 0 300 220" role="img" aria-labelledby="c4-t c4-d">
+        <li class="item">
+          <svg viewBox="0 0 300 220" role="img" aria-labelledby="c4-t c4-d">
             <title id="c4-t">Cinnamon bun with white icing</title>
             <desc id="c4-d">A swirled cinnamon bun with a spiral of dark brown cinnamon sugar and white icing drizzled over the top, on a white plate.</desc>
-            <rect width="300" height="220" fill="#FFF3E2"/>
             <ellipse cx="150" cy="172" rx="110" ry="16" fill="#FFFFFF" stroke="#D8C2A2" stroke-width="3"/>
             <ellipse cx="150" cy="120" rx="80" ry="48" fill="#D4924A"/>
             <path d="M150 120m0 0q0-10 10-10t10 10-20 22-34 0-6-34 40-26 60 6 12 52-30 36" fill="none" stroke="#7A3F18" stroke-width="7" stroke-linecap="round"/>
@@ -176,7 +179,7 @@ footer a{color:var(--bg)}
     <div class="wrap">
       <h2 id="visit-h">Opening hours</h2>
       <table class="hours">
-        <caption class="sr-only" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Opening hours by day</caption>
+        <caption class="sr-only">Opening hours by day</caption>
         <thead><tr><th scope="col">Day</th><th scope="col">Hours</th></tr></thead>
         <tbody>
           <tr><th scope="row">Monday to Friday</th><td>7:30am to 4pm</td></tr>
