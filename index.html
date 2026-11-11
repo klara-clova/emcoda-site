@@ -176,6 +176,24 @@ section{scroll-margin-top:20px}
 .founding .btn{background:#2B2140;color:#FFF8F2;border-color:#2B2140}
 .note{color:var(--muted);margin:24px 0 0}
 
+
+/* ---------- Hero website preview ---------- */
+.hero-sub{font-size:16px !important;color:var(--muted)}
+.mock-wrap{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:0 12px}
+.mock,.sample-card .mock{width:100%;max-width:440px;background:#FFFFFF;border:2px solid var(--line);box-shadow:0 6px 0 var(--line);border-radius:22px;overflow:hidden;color:var(--on-pastel)}
+.mock-bar{background:var(--lav);padding:10px 14px;display:flex;gap:6px}
+.mock-bar span{width:10px;height:10px;border-radius:5px;display:block}
+.mock-body{padding:18px 20px;display:flex;flex-direction:column;gap:12px}
+.mock-title{font-family:Fredoka,sans-serif;font-weight:700;font-size:24px}
+.mock-imgs{display:flex;gap:12px}
+.mock-imgs div{flex:1;height:90px;border-radius:14px}
+.mock-alt{background:var(--butter);border:2px solid var(--on-pastel);border-radius:12px;padding:8px 12px;font-size:14px;font-weight:700}
+.sample-card{margin-top:28px;border-radius:32px;padding:32px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:32px;align-items:center;background:var(--butter)}
+.sample-card h3{font-size:30px;margin-bottom:8px}
+.sample-card p{margin:0 0 16px}
+.sample-card .btn{background:#2B2140;color:#FFF8F2;border-color:#2B2140}
+@media (max-width:760px){.sample-card{grid-template-columns:1fr;padding:24px}}
+
 /* ---------- MOSS showcase ---------- */
 .moss{border-radius:36px;padding:40px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:36px;align-items:center}
 .moss-text{display:flex;flex-direction:column;gap:16px}
@@ -274,9 +292,9 @@ footer .logo{font-size:20px;color:var(--ink)}
   <nav class="nav" aria-label="Main">
     <a href="#" class="logo"><span class="logo-dot em-float" aria-hidden="true"></span>emcoda</a>
     <div class="nav-links">
-      <a href="#build">What I build</a>
-      <a href="#work">Work</a>
       <a href="#websites">Websites</a>
+      <a href="#build">Discord bots</a>
+      <a href="#work">Work</a>
       <a href="#how">How it works</a>
       <a href="#pricing">Pricing</a>
       <a class="btn btn-dark em-btn" href="#hello">Say hi</a>
@@ -285,23 +303,29 @@ footer .logo{font-size:20px;color:var(--ink)}
 
   <header class="hero">
     <div class="hero-text">
-      <span class="pill"><span class="dot em-blink" aria-hidden="true"></span>Taking new projects</span>
-      <h1>Little bots that make your <span class="hl em-wiggle" style="background:var(--pink)">Discord</span> feel like <span class="hl em-wiggle" style="background:var(--lav);animation-delay:.6s">home</span>.</h1>
-      <p>Branded welcome cards, rank cards, event sign-ups and web dashboards, custom-made for your community and looked after by me, so you can stop doing it all by hand. Made for creators and gaming communities. <strong>From £79, ready in 3 days.</strong></p>
+      <span class="pill"><span class="dot em-blink" aria-hidden="true"></span>Taking new projects in Sutton</span>
+      <h1>Websites that <span class="hl em-wiggle" style="background:var(--pink)">everyone</span> can use.</h1>
+      <p>Friendly, fast websites for small businesses in Sutton and nearby. Every photo gets a real description, so screen readers can read your site too. <strong>From &pound;349.</strong></p>
       <div class="ctas">
         <a class="btn btn-peach em-btn" href="#hello">Get a free quote</a>
-        <a class="btn btn-white em-btn" href="#moss">See MOSS, my live bot</a>
+        <a class="btn btn-white em-btn" href="demo/bakery/">See a sample website</a>
       </div>
+      <p class="hero-sub">I also build custom Discord bots, from &pound;79. <a href="#build">See what I build</a></p>
     </div>
 
     <div class="scene" aria-hidden="true">
       <div class="em-blob" style="left:30px;top:20px;width:300px;height:300px;background:var(--blob-1)"></div>
       <div class="em-blob" style="right:0;bottom:30px;width:240px;height:240px;background:var(--blob-2);animation-delay:-3s"></div>
       <div class="em-blob" style="right:60px;top:0;width:120px;height:120px;background:var(--blob-3);animation-delay:-5s"></div>
-      <div class="bubbles">
-        <div class="bubble em-float" style="align-self:flex-start;background:#FFFFFF;border-radius:22px 22px 22px 6px"><small>YourBot</small>Welcome in, Sam! Pick your roles below so we know what you're into.</div>
-        <div class="bubble em-float" style="align-self:flex-end;background:var(--lav);border-radius:22px 22px 6px 22px;animation-delay:-1.3s"><small>YourBot</small>Game night starts in 10 min. 14 going!</div>
-        <div class="bubble em-float" style="align-self:flex-start;margin-left:40px;background:var(--mint);border-radius:22px 22px 22px 6px;animation-delay:-2.6s"><small>YourBot</small>Match found: you both want the blue teapot.</div>
+      <div class="mock-wrap">
+        <div class="mock">
+          <div class="mock-bar"><span style="background:var(--pink)"></span><span style="background:var(--butter)"></span><span style="background:var(--mint)"></span></div>
+          <div class="mock-body">
+            <div class="mock-title">Little Rye Bakery</div>
+            <div class="mock-imgs"><div style="background:var(--peach)"></div><div style="background:var(--mint)"></div></div>
+            <div class="mock-alt">Image: chocolate cake with fresh raspberries</div>
+          </div>
+        </div>
       </div>
       <div class="mouse-track">
         <div class="em-scurry"><div class="em-mouse" aria-hidden="true"><span class="m-idle"></span><span class="m-walk"></span></div></div>
@@ -405,6 +429,21 @@ footer .logo{font-size:20px;color:var(--ink)}
       <div class="card sticker" style="background:var(--lav);transform:rotate(-1.5deg)"><h3>Made for everyone</h3><p>Every photo gets a real description, so a screen reader says "chocolate cake with fresh raspberries, £35" instead of just "image".</p></div>
       <div class="card sticker" style="background:var(--mint);transform:rotate(1deg)"><h3>Easy for Google to read</h3><p>Clear page titles, descriptions and fast loading: the basics many small business sites skip.</p></div>
       <div class="card sticker" style="background:var(--peach);transform:rotate(-1deg)"><h3>Looked after for you</h3><p>Hosting, fixes and small changes, so you never have to touch the code yourself.</p></div>
+    </div>
+    <div class="sample-card sticker">
+      <div>
+        <h3>See what you get</h3>
+        <p>A sample website for a fictional bakery. Open it, press Tab, or try a screen reader: every picture is described and every link can be reached from the keyboard.</p>
+        <a class="btn em-btn" href="demo/bakery/">Open the bakery sample</a>
+      </div>
+      <div class="mock" aria-hidden="true">
+        <div class="mock-bar"><span style="background:var(--pink)"></span><span style="background:var(--butter)"></span><span style="background:var(--mint)"></span></div>
+        <div class="mock-body">
+          <div class="mock-title">Little Rye Bakery</div>
+          <div class="mock-imgs"><div style="background:var(--peach)"></div><div style="background:var(--mint)"></div></div>
+          <div class="mock-alt">Image: chocolate cake with fresh raspberries</div>
+        </div>
+      </div>
     </div>
     <p class="moss-note" style="margin:22px 0 26px">Why I care: I built PixelRoom, an AI helper that describes images for blind and visually impaired people. Every website I make gets the same care.</p>
     <div class="prices">
