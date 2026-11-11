@@ -186,12 +186,17 @@ section{scroll-margin-top:20px}
 .mock-body{padding:16px 20px;display:flex;flex-direction:column;gap:10px}
 .mock-title{font-family:Fredoka,sans-serif;font-weight:700;font-size:22px}
 .mock-title small{font-family:Nunito,sans-serif;font-size:13px;font-weight:700;color:#5B4D78}
-.mock-pic{display:block;width:100%;height:150px;border-radius:14px;background:#FFF3E2}
-.mock-alt{margin:0;background:var(--butter);border:2px solid var(--on-pastel);border-radius:12px;padding:8px 12px;font-size:14px;line-height:1.4;min-height:5.6em}
+.pics{display:flex;justify-content:center;padding:6px 0 4px}
+.pic{flex:0 0 38%;aspect-ratio:300/220;margin:0 -4%;padding:0;border:2px solid var(--on-pastel);border-radius:14px;overflow:hidden;background:#FFF3E2;cursor:pointer;box-shadow:0 3px 0 var(--on-pastel);transition:transform .2s,z-index 0s;position:relative}
+.pic svg{display:block;width:100%;height:100%}
+.pic:nth-child(1){transform:rotate(-6deg);z-index:1}.pic:nth-child(2){z-index:2;transform:translateY(-6px)}.pic:nth-child(3){transform:rotate(6deg);z-index:1}
+.pic:hover,.pic:focus-visible,.pic.on{z-index:5;transform:translateY(-12px) scale(1.12) rotate(0)}
+.pic:focus-visible{outline:3px solid var(--on-pastel);outline-offset:3px}
+@media (prefers-reduced-motion:reduce){.pic{transition:none}}
+.mock-alt{margin:0;background:#FFF8DC;border:2px solid var(--on-pastel);border-radius:12px;padding:8px 12px;font-size:14px;line-height:1.4;min-height:5.6em}
 .mock-ctl{display:flex;flex-wrap:wrap;gap:12px 18px;align-items:center;font-size:14px;font-weight:700}
 .mock-ctl a{color:var(--on-pastel)}
-.mock-pause{font:inherit;font-size:14px;font-weight:700;background:#FFFFFF;color:var(--on-pastel);border:2px solid var(--on-pastel);border-radius:999px;padding:4px 14px;cursor:pointer}
-.mock-pause:focus-visible,.mock-ctl a:focus-visible{outline:3px solid var(--on-pastel);outline-offset:3px}
+.mock-ctl a:focus-visible{outline:3px solid var(--on-pastel);outline-offset:3px}
 .sample-card{margin-top:28px;border-radius:32px;padding:32px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:32px;align-items:center;background:var(--butter)}
 .sample-card h3{font-size:30px;margin-bottom:8px}
 .sample-card p{margin:0 0 16px}
@@ -297,7 +302,6 @@ footer .logo{font-size:20px;color:var(--ink)}
     <symbol id="pic-cake" viewBox="0 0 300 220"><rect width="300" height="220" fill="#FFF3E2"/><ellipse cx="150" cy="180" rx="120" ry="18" fill="#FFFFFF" stroke="#D8C2A2" stroke-width="3"/><path d="M70 110h160v62q-80 22-160 0z" fill="#5A2E1A"/><ellipse cx="150" cy="110" rx="80" ry="22" fill="#3E1F10"/><path d="M70 118q10 24 20 4t20 6 20-8 20 8 20-6 20 6 20-4 20 8v-24H70z" fill="#3E1F10"/><g fill="#C2263A"><circle cx="112" cy="100" r="11"/><circle cx="138" cy="92" r="11"/><circle cx="164" cy="92" r="11"/><circle cx="190" cy="100" r="11"/><circle cx="151" cy="108" r="11"/><circle cx="125" cy="112" r="10"/></g></symbol>
     <symbol id="pic-bread" viewBox="0 0 300 220"><rect width="300" height="220" fill="#FFF3E2"/><rect x="30" y="160" width="240" height="26" rx="8" fill="#B7793F"/><ellipse cx="150" cy="110" rx="100" ry="62" fill="#C47A32"/><path d="M95 85q55-35 110 0" stroke="#FFF1DC" stroke-width="9" fill="none" stroke-linecap="round"/><path d="M105 125q45-18 90 0" stroke="#E7B27A" stroke-width="5" fill="none" stroke-linecap="round"/></symbol>
     <symbol id="pic-croissant" viewBox="0 0 300 220"><rect width="300" height="220" fill="#FFF3E2"/><ellipse cx="150" cy="170" rx="110" ry="16" fill="#FFFFFF" stroke="#D8C2A2" stroke-width="3"/><path d="M40 150q20-90 110-90t110 90q-30-20-60-18-20-30-50-30t-50 30q-30-2-60 18z" fill="#E0A04A"/><path d="M95 82l15 50M130 68l8 60M170 68l-8 60M205 82l-15 50" stroke="#B7742A" stroke-width="5" stroke-linecap="round"/></symbol>
-    <symbol id="pic-bun" viewBox="0 0 300 220"><rect width="300" height="220" fill="#FFF3E2"/><ellipse cx="150" cy="172" rx="110" ry="16" fill="#FFFFFF" stroke="#D8C2A2" stroke-width="3"/><ellipse cx="150" cy="120" rx="80" ry="48" fill="#D4924A"/><path d="M150 120m0 0q0-10 10-10t10 10-20 22-34 0-6-34 40-26 60 6 12 52-30 36" fill="none" stroke="#7A3F18" stroke-width="7" stroke-linecap="round"/><path d="M95 100q20 14 45 4t50 6 20-8" stroke="#FFFFFF" stroke-width="8" fill="none" stroke-linecap="round"/></symbol>
   </defs>
 </svg>
 <div class="wrap">
@@ -333,9 +337,9 @@ footer .logo{font-size:20px;color:var(--ink)}
         <div class="mock-bar" aria-hidden="true"><span style="background:var(--pink)"></span><span style="background:var(--butter)"></span><span style="background:var(--mint)"></span></div>
         <div class="mock-body">
           <div class="mock-title">Little Rye Bakery <small>(sample)</small></div>
-          <svg class="mock-pic" viewBox="0 0 300 220" aria-hidden="true" focusable="false"><use href="#pic-cake"></use></svg>
-          <p class="mock-alt"><strong>Picture description:</strong> <span class="mock-alt-text">A round chocolate cake with a thick glossy dark icing and six red raspberries arranged in a circle on top, on a white plate.</span></p>
-          <div class="mock-ctl"><button type="button" class="mock-pause" aria-pressed="false">Pause</button><a href="#websites">See how it works</a></div>
+          <div class="pics"><button type="button" class="pic" data-alt="A round golden-brown sourdough loaf with a deep curved cut across the top and a light dusting of flour, on a wooden board."><svg viewBox="0 0 300 220" role="img" aria-label="A round golden-brown sourdough loaf with a deep curved cut across the top and a light dusting of flour, on a wooden board." focusable="false"><use href="#pic-bread"></use></svg></button><button type="button" class="pic" data-alt="A round chocolate cake with a thick glossy dark icing and six red raspberries arranged in a circle on top, on a white plate."><svg viewBox="0 0 300 220" role="img" aria-label="A round chocolate cake with a thick glossy dark icing and six red raspberries arranged in a circle on top, on a white plate." focusable="false"><use href="#pic-cake"></use></svg></button><button type="button" class="pic" data-alt="A single golden croissant shaped like a crescent, with visible layered ridges, on a white plate."><svg viewBox="0 0 300 220" role="img" aria-label="A single golden croissant shaped like a crescent, with visible layered ridges, on a white plate." focusable="false"><use href="#pic-croissant"></use></svg></button></div>
+          <p class="mock-alt"><strong>Picture description:</strong> <span class="mock-alt-text">A round golden-brown sourdough loaf with a deep curved cut across the top and a light dusting of flour, on a wooden board.</span></p>
+          <div class="mock-ctl"><a href="#websites">See how it works</a></div>
         </div>
       </div>
       </div>
@@ -452,9 +456,9 @@ footer .logo{font-size:20px;color:var(--ink)}
         <div class="mock-bar" aria-hidden="true"><span style="background:var(--pink)"></span><span style="background:var(--butter)"></span><span style="background:var(--mint)"></span></div>
         <div class="mock-body">
           <div class="mock-title">Little Rye Bakery <small>(sample)</small></div>
-          <svg class="mock-pic" viewBox="0 0 300 220" aria-hidden="true" focusable="false"><use href="#pic-cake"></use></svg>
-          <p class="mock-alt"><strong>Picture description:</strong> <span class="mock-alt-text">A round chocolate cake with a thick glossy dark icing and six red raspberries arranged in a circle on top, on a white plate.</span></p>
-          <div class="mock-ctl"><button type="button" class="mock-pause" aria-pressed="false">Pause</button></div>
+          <div class="pics"><button type="button" class="pic" data-alt="A round golden-brown sourdough loaf with a deep curved cut across the top and a light dusting of flour, on a wooden board."><svg viewBox="0 0 300 220" role="img" aria-label="A round golden-brown sourdough loaf with a deep curved cut across the top and a light dusting of flour, on a wooden board." focusable="false"><use href="#pic-bread"></use></svg></button><button type="button" class="pic" data-alt="A round chocolate cake with a thick glossy dark icing and six red raspberries arranged in a circle on top, on a white plate."><svg viewBox="0 0 300 220" role="img" aria-label="A round chocolate cake with a thick glossy dark icing and six red raspberries arranged in a circle on top, on a white plate." focusable="false"><use href="#pic-cake"></use></svg></button><button type="button" class="pic" data-alt="A single golden croissant shaped like a crescent, with visible layered ridges, on a white plate."><svg viewBox="0 0 300 220" role="img" aria-label="A single golden croissant shaped like a crescent, with visible layered ridges, on a white plate." focusable="false"><use href="#pic-croissant"></use></svg></button></div>
+          <p class="mock-alt"><strong>Picture description:</strong> <span class="mock-alt-text">A round golden-brown sourdough loaf with a deep curved cut across the top and a light dusting of flour, on a wooden board.</span></p>
+          
         </div>
       </div>
     </div>
@@ -673,22 +677,12 @@ footer .logo{font-size:20px;color:var(--ink)}
 <script>
 /* Sample picture preview: the pictures change, and the description changes with them */
 (function(){
-  var items=[
-    {id:'pic-cake',text:'A round chocolate cake with a thick glossy dark icing and six red raspberries arranged in a circle on top, on a white plate.'},
-    {id:'pic-bread',text:'A round golden-brown sourdough loaf with a deep curved cut across the top and a light dusting of flour, on a wooden board.'},
-    {id:'pic-croissant',text:'A single golden croissant shaped like a crescent, with visible layered ridges, on a white plate.'},
-    {id:'pic-bun',text:'A swirled cinnamon bun with a spiral of dark brown cinnamon sugar and white icing drizzled over the top, on a white plate.'}
-  ];
-  var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
-  [].slice.call(document.querySelectorAll('.mock[data-cycle]')).forEach(function(m){
-    var use=m.querySelector('use'),txt=m.querySelector('.mock-alt-text'),btn=m.querySelector('.mock-pause');
-    var n=0,timer=null,paused=reduce;
-    function show(i){n=i%items.length;use.setAttribute('href','#'+items[n].id);txt.textContent=items[n].text;}
-    function start(){if(timer||paused)return;timer=setInterval(function(){show(n+1);},5000);}
-    function stop(){clearInterval(timer);timer=null;}
-    function label(){btn.textContent=paused?'Play':'Pause';btn.setAttribute('aria-pressed',paused?'true':'false');}
-    btn.addEventListener('click',function(){paused=!paused;label();paused?stop():start();});
-    label();start();
+  [].slice.call(document.querySelectorAll('.mock')).forEach(function(m){
+    var txt=m.querySelector('.mock-alt-text'),pics=[].slice.call(m.querySelectorAll('.pic'));
+    if(!txt)return;
+    function on(p){pics.forEach(function(x){x.classList.toggle('on',x===p);});txt.textContent=p.getAttribute('data-alt');}
+    on(pics[0]);
+    pics.forEach(function(p){['mouseenter','focus','click'].forEach(function(e){p.addEventListener(e,function(){on(p);});});});
   });
 })();
 </script>
