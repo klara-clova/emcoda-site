@@ -184,24 +184,22 @@ section{scroll-margin-top:20px}
 .hero-pause{font:inherit;font-size:13px;font-weight:700;background:transparent;color:var(--muted);border:1.5px solid var(--muted);border-radius:999px;padding:2px 12px;margin-left:8px;cursor:pointer}
 .hero-pause:focus-visible{outline:3px solid #FFF8F2;outline-offset:3px}
 @media (prefers-reduced-motion:reduce){#hero-h1,#hero-p,#hero-b2,#hero-sub{transition:none}}
-.mock-wrap{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:0 12px 46px}
-.mock,.sample-card .mock{width:100%;max-width:440px;background:#FFFFFF;border:2px solid var(--line);box-shadow:0 6px 0 var(--line);border-radius:22px;overflow:hidden;color:var(--on-pastel)}
-.mock-bar{background:var(--lav);padding:10px 14px;display:flex;gap:6px}
-.mock-bar span{width:10px;height:10px;border-radius:5px;display:block}
-.mock-body{padding:16px 20px;display:flex;flex-direction:column;gap:10px}
-.mock-title{font-family:Fredoka,sans-serif;font-weight:700;font-size:22px}
-.mock-title small{font-family:Nunito,sans-serif;font-size:13px;font-weight:700;color:#5B4D78}
-.pics{display:flex;justify-content:center;padding:6px 0 4px}
-.pic{flex:0 0 38%;aspect-ratio:300/220;margin:0 -4%;padding:0;border:2px solid var(--on-pastel);border-radius:14px;overflow:hidden;background:#FFF3E2;cursor:pointer;box-shadow:0 3px 0 var(--on-pastel);transition:transform .2s,z-index 0s;position:relative}
-.pic svg{display:block;width:100%;height:100%}
-.pic:nth-child(1){transform:rotate(-6deg);z-index:1}.pic:nth-child(2){z-index:2;transform:translateY(-6px)}.pic:nth-child(3){transform:rotate(6deg);z-index:1}
-.pic:hover,.pic:focus-visible,.pic.on{z-index:5;transform:translateY(-12px) scale(1.12) rotate(0)}
-.pic:focus-visible{outline:3px solid var(--on-pastel);outline-offset:3px}
-@media (prefers-reduced-motion:reduce){.pic{transition:none}}
-.mock-alt{margin:0;background:#FFF8DC;border:2px solid var(--on-pastel);border-radius:12px;padding:8px 12px;font-size:14px;line-height:1.4;min-height:5.6em}
-.mock-ctl{display:flex;flex-wrap:wrap;gap:12px 18px;align-items:center;font-size:14px;font-weight:700}
-.mock-ctl a{color:var(--on-pastel)}
-.mock-ctl a:focus-visible{outline:3px solid var(--on-pastel);outline-offset:3px}
+.mock-wrap{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 16px 46px}
+.fan{width:100%;max-width:520px}
+.fan-label{font-family:Fredoka,sans-serif;font-weight:700;font-size:20px;color:#FFF8F2;margin:0 0 6px 8px}
+.fan-label small{font-family:Nunito,sans-serif;font-size:13px;font-weight:700;color:#D9CCF2}
+.sample-card .fan-label{color:var(--on-pastel)}.sample-card .fan-label small{color:#5B4D78}
+.fan-row{display:flex;gap:6px;align-items:flex-start;padding-top:10px}
+.dcard{flex:1 1 0;min-width:0;font:inherit;text-align:left;background:none;border:0;padding:0;cursor:pointer;color:var(--on-pastel);position:relative;z-index:1;transition:transform .2s}
+.dcard:nth-child(1){transform:rotate(-5deg)}.dcard:nth-child(2){transform:translateY(-8px);z-index:2}.dcard:nth-child(3){transform:rotate(5deg)}
+.dcard:hover,.dcard:focus-visible,.dcard.on{z-index:5;transform:translateY(-12px) scale(1.14) rotate(0)}
+.dcard:focus-visible{outline:3px solid #FFF8F2;outline-offset:4px;border-radius:14px}
+.dpic{display:block;margin:0 -9%;aspect-ratio:300/220;border:2px solid var(--on-pastel);border-radius:14px;overflow:hidden;background:#FFF3E2;box-shadow:0 3px 0 var(--on-pastel);position:relative}
+.dpic svg{display:block;width:100%;height:100%}
+.ddesc{display:block;margin-top:8px;background:#FFF8DC;border:2px solid var(--on-pastel);border-radius:12px;padding:6px 9px;font-size:12px;line-height:1.35;box-shadow:0 3px 0 var(--on-pastel)}
+.fan-link{display:inline-block;margin:16px 0 0 8px;font-size:14px;font-weight:700;color:#FFF8F2}
+@media (max-width:520px){.fan-label{font-size:18px}.ddesc{font-size:11.5px;padding:5px 7px}}
+@media (prefers-reduced-motion:reduce){.dcard{transition:none}}
 .sample-card{margin-top:28px;border-radius:32px;padding:32px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:32px;align-items:center;background:var(--butter)}
 .sample-card h3{font-size:30px;margin-bottom:8px}
 .sample-card p{margin:0 0 16px}
@@ -338,15 +336,7 @@ footer .logo{font-size:20px;color:var(--ink)}
       <div class="em-blob" aria-hidden="true" style="right:0;bottom:30px;width:240px;height:240px;background:var(--blob-2);animation-delay:-3s"></div>
       <div class="em-blob" aria-hidden="true" style="right:60px;top:0;width:120px;height:120px;background:var(--blob-3);animation-delay:-5s"></div>
       <div class="mock-wrap">
-        <div class="mock" data-cycle>
-        <div class="mock-bar" aria-hidden="true"><span style="background:var(--pink)"></span><span style="background:var(--butter)"></span><span style="background:var(--mint)"></span></div>
-        <div class="mock-body">
-          <div class="mock-title">Little Rye Bakery <small>(sample)</small></div>
-          <div class="pics"><button type="button" class="pic" data-alt="A round golden-brown sourdough loaf with a deep curved cut across the top and a light dusting of flour, on a wooden board."><svg viewBox="0 0 300 220" role="img" aria-label="A round golden-brown sourdough loaf with a deep curved cut across the top and a light dusting of flour, on a wooden board." focusable="false"><use href="#pic-bread"></use></svg></button><button type="button" class="pic" data-alt="A round chocolate cake with a thick glossy dark icing and six red raspberries arranged in a circle on top, on a white plate."><svg viewBox="0 0 300 220" role="img" aria-label="A round chocolate cake with a thick glossy dark icing and six red raspberries arranged in a circle on top, on a white plate." focusable="false"><use href="#pic-cake"></use></svg></button><button type="button" class="pic" data-alt="A single golden croissant shaped like a crescent, with visible layered ridges, on a white plate."><svg viewBox="0 0 300 220" role="img" aria-label="A single golden croissant shaped like a crescent, with visible layered ridges, on a white plate." focusable="false"><use href="#pic-croissant"></use></svg></button></div>
-          <p class="mock-alt"><strong>Picture description:</strong> <span class="mock-alt-text">A round golden-brown sourdough loaf with a deep curved cut across the top and a light dusting of flour, on a wooden board.</span></p>
-          <div class="mock-ctl"><a href="#websites">See how it works</a></div>
-        </div>
-      </div>
+        <div class="fan" role="group" aria-label="Sample pictures with descriptions"><div class="fan-label">Little Rye Bakery <small>(sample)</small></div><div class="fan-row"><button type="button" class="dcard"><span class="dpic"><svg viewBox="0 0 300 220" role="img" aria-label="Sourdough loaf" focusable="false"><use href="#pic-bread"></use></svg></span><span class="ddesc"><strong>Picture description:</strong> Golden-brown sourdough loaf with a deep curved cut and a dusting of flour, on a wooden board.</span></button><button type="button" class="dcard"><span class="dpic"><svg viewBox="0 0 300 220" role="img" aria-label="Chocolate cake" focusable="false"><use href="#pic-cake"></use></svg></span><span class="ddesc"><strong>Picture description:</strong> Round chocolate cake with glossy dark icing and six red raspberries on top, on a white plate.</span></button><button type="button" class="dcard"><span class="dpic"><svg viewBox="0 0 300 220" role="img" aria-label="Croissant" focusable="false"><use href="#pic-croissant"></use></svg></span><span class="ddesc"><strong>Picture description:</strong> Golden crescent croissant with visible layered ridges, on a white plate.</span></button></div></div><a class="fan-link" href="#websites">See how it works</a>
       </div>
       <div class="mouse-track" aria-hidden="true">
         <div class="em-scurry"><div class="em-mouse" aria-hidden="true"><span class="m-idle"></span><span class="m-walk"></span></div></div>
@@ -457,15 +447,7 @@ footer .logo{font-size:20px;color:var(--ink)}
         <p>A sample website for a fictional bakery. Open it, press Tab, or try a screen reader: every picture is described and every link can be reached from the keyboard.</p>
         <a class="btn em-btn" href="demo/bakery/">Open the bakery sample</a>
       </div>
-      <div class="mock" data-cycle>
-        <div class="mock-bar" aria-hidden="true"><span style="background:var(--pink)"></span><span style="background:var(--butter)"></span><span style="background:var(--mint)"></span></div>
-        <div class="mock-body">
-          <div class="mock-title">Little Rye Bakery <small>(sample)</small></div>
-          <div class="pics"><button type="button" class="pic" data-alt="A round golden-brown sourdough loaf with a deep curved cut across the top and a light dusting of flour, on a wooden board."><svg viewBox="0 0 300 220" role="img" aria-label="A round golden-brown sourdough loaf with a deep curved cut across the top and a light dusting of flour, on a wooden board." focusable="false"><use href="#pic-bread"></use></svg></button><button type="button" class="pic" data-alt="A round chocolate cake with a thick glossy dark icing and six red raspberries arranged in a circle on top, on a white plate."><svg viewBox="0 0 300 220" role="img" aria-label="A round chocolate cake with a thick glossy dark icing and six red raspberries arranged in a circle on top, on a white plate." focusable="false"><use href="#pic-cake"></use></svg></button><button type="button" class="pic" data-alt="A single golden croissant shaped like a crescent, with visible layered ridges, on a white plate."><svg viewBox="0 0 300 220" role="img" aria-label="A single golden croissant shaped like a crescent, with visible layered ridges, on a white plate." focusable="false"><use href="#pic-croissant"></use></svg></button></div>
-          <p class="mock-alt"><strong>Picture description:</strong> <span class="mock-alt-text">A round golden-brown sourdough loaf with a deep curved cut across the top and a light dusting of flour, on a wooden board.</span></p>
-          
-        </div>
-      </div>
+      <div class="fan" role="group" aria-label="Sample pictures with descriptions"><div class="fan-label">Little Rye Bakery <small>(sample)</small></div><div class="fan-row"><button type="button" class="dcard"><span class="dpic"><svg viewBox="0 0 300 220" role="img" aria-label="Sourdough loaf" focusable="false"><use href="#pic-bread"></use></svg></span><span class="ddesc"><strong>Picture description:</strong> Golden-brown sourdough loaf with a deep curved cut and a dusting of flour, on a wooden board.</span></button><button type="button" class="dcard"><span class="dpic"><svg viewBox="0 0 300 220" role="img" aria-label="Chocolate cake" focusable="false"><use href="#pic-cake"></use></svg></span><span class="ddesc"><strong>Picture description:</strong> Round chocolate cake with glossy dark icing and six red raspberries on top, on a white plate.</span></button><button type="button" class="dcard"><span class="dpic"><svg viewBox="0 0 300 220" role="img" aria-label="Croissant" focusable="false"><use href="#pic-croissant"></use></svg></span><span class="ddesc"><strong>Picture description:</strong> Golden crescent croissant with visible layered ridges, on a white plate.</span></button></div></div>
     </div>
     <p class="moss-note" style="margin:22px 0 26px">Why I care: I built PixelRoom, an AI helper that describes images for blind and visually impaired people. Every website I make gets the same care.</p>
     <div class="prices">
@@ -702,12 +684,11 @@ footer .logo{font-size:20px;color:var(--ink)}
   if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fit);
 })();
 (function(){
-  [].slice.call(document.querySelectorAll('.mock')).forEach(function(m){
-    var txt=m.querySelector('.mock-alt-text'),pics=[].slice.call(m.querySelectorAll('.pic'));
-    if(!txt)return;
-    function on(p){pics.forEach(function(x){x.classList.toggle('on',x===p);});txt.textContent=p.getAttribute('data-alt');}
-    on(pics[0]);
-    pics.forEach(function(p){['mouseenter','focus','click'].forEach(function(e){p.addEventListener(e,function(){on(p);});});});
+  [].slice.call(document.querySelectorAll('.fan')).forEach(function(f){
+    var cs=[].slice.call(f.querySelectorAll('.dcard'));
+    function on(c){cs.forEach(function(x){x.classList.toggle('on',x===c);});}
+    on(cs[0]);
+    cs.forEach(function(c){['mouseenter','focus','click'].forEach(function(e){c.addEventListener(e,function(){on(c);});});});
   });
 })();
 </script>
