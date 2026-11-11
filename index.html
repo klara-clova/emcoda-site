@@ -179,11 +179,11 @@ section{scroll-margin-top:20px}
 
 /* ---------- Hero website preview ---------- */
 .hero-sub{font-size:16px !important;color:var(--muted)}
-.hero-text.swap #hero-h1,.hero-text.swap #hero-p,.hero-text.swap #hero-b2,.hero-text.swap #hero-sub{opacity:0}
-#hero-h1,#hero-p,#hero-b2,#hero-sub{transition:opacity .3s}
-.hero-pause{font:inherit;font-size:13px;font-weight:700;background:transparent;color:var(--muted);border:1.5px solid var(--muted);border-radius:999px;padding:2px 12px;margin-left:8px;cursor:pointer}
-.hero-pause:focus-visible{outline:3px solid #FFF8F2;outline-offset:3px}
-@media (prefers-reduced-motion:reduce){#hero-h1,#hero-p,#hero-b2,#hero-sub{transition:none}}
+#hero-h1,#hero-p,#hero-b2,#hero-sub{transition:opacity .7s ease,transform .7s ease}
+#hero-p{transition-delay:.08s}#hero-b2{transition-delay:.16s}#hero-sub{transition-delay:.24s}
+.hero-text.out #hero-h1,.hero-text.out #hero-p,.hero-text.out #hero-b2,.hero-text.out #hero-sub{opacity:0;transform:translateY(-10px);transition-duration:.5s;transition-delay:0s}
+.hero-text.pre #hero-h1,.hero-text.pre #hero-p,.hero-text.pre #hero-b2,.hero-text.pre #hero-sub{opacity:0;transform:translateY(12px);transition:none}
+@media (prefers-reduced-motion:reduce){#hero-h1,#hero-p,#hero-b2,#hero-sub{transition:none !important;transform:none !important}}
 .mock-wrap{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 16px 46px}
 .fan{width:100%;max-width:520px}
 .fan-label{font-family:Fredoka,sans-serif;font-weight:700;font-size:20px;color:#FFF8F2;margin:0 0 6px 8px}
@@ -328,7 +328,7 @@ footer .logo{font-size:20px;color:var(--ink)}
         <a class="btn btn-peach em-btn" href="#hello">Get a free quote</a>
         <a class="btn btn-white em-btn" id="hero-b2" href="demo/bakery/">See a sample website</a>
       </div>
-      <p class="hero-sub"><span id="hero-sub">I also build custom Discord bots, from &pound;79. <a href="#build">See what I build</a></span> <button type="button" class="hero-pause" id="hero-pause" aria-pressed="false">Pause</button></p>
+      <p class="hero-sub"><span id="hero-sub">I also build custom Discord bots, from &pound;79.</span></p>
     </div>
 
     <div class="scene">
@@ -665,21 +665,19 @@ footer .logo{font-size:20px;color:var(--ink)}
 /* Sample picture preview: the pictures change, and the description changes with them */
 (function(){
   var box=document.querySelector('.hero-text');if(!box)return;
-  var h=document.getElementById('hero-h1'),p=document.getElementById('hero-p'),b=document.getElementById('hero-b2'),sub=document.getElementById('hero-sub'),btn=document.getElementById('hero-pause');
+  var h=document.getElementById('hero-h1'),p=document.getElementById('hero-p'),b=document.getElementById('hero-b2'),sub=document.getElementById('hero-sub');
   var V=[
     {h:h.innerHTML,p:p.innerHTML,bt:b.textContent,bh:b.getAttribute('href'),s:sub.innerHTML},
-    {h:'Little bots that make your <span class="hl em-wiggle" style="background:var(--pink)">Discord</span> feel like <span class="hl em-wiggle" style="background:var(--lav);animation-delay:.6s">home</span>.',p:'Branded welcome cards, rank cards, event sign-ups and web dashboards, custom-made for your community and looked after by me. Made for creators and gaming communities. <strong>From &pound;79.</strong>',bt:'See MOSS, my live bot',bh:'#moss',s:'I also build websites for small businesses, from &pound;349. <a href="#websites">See websites</a>'}
+    {h:'Little bots that make your <span class="hl em-wiggle" style="background:var(--pink)">Discord</span> feel like <span class="hl em-wiggle" style="background:var(--lav);animation-delay:.6s">home</span>.',p:'Branded welcome cards, rank cards, event sign-ups and web dashboards, custom-made for your community and looked after by me. Made for creators and gaming communities. <strong>From &pound;79.</strong>',bt:'See MOSS, my live bot',bh:'#moss',s:'I also build websites for small businesses, from &pound;349.'}
   ];
   function set(i){h.innerHTML=V[i].h;p.innerHTML=V[i].p;b.textContent=V[i].bt;b.setAttribute('href',V[i].bh);sub.innerHTML=V[i].s;}
   function fit(){box.style.minHeight='';var m=0;for(var i=0;i<V.length;i++){set(i);m=Math.max(m,box.offsetHeight);}set(n);box.style.minHeight=m+'px';}
   var n=0,timer=null,paused=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches,hold=false;
-  function go(){if(paused||hold)return;box.classList.add('swap');setTimeout(function(){n=(n+1)%V.length;set(n);box.classList.remove('swap');},300);}
+  function go(){if(paused||hold)return;box.classList.add('out');setTimeout(function(){n=(n+1)%V.length;set(n);box.classList.remove('out');box.classList.add('pre');void box.offsetHeight;box.classList.remove('pre');},550);}
   function start(){if(!timer)timer=setInterval(go,7000);}
-  function label(){btn.textContent=paused?'Play':'Pause';btn.setAttribute('aria-pressed',paused?'true':'false');}
-  btn.addEventListener('click',function(){paused=!paused;label();});
   box.addEventListener('mouseenter',function(){hold=true;});box.addEventListener('mouseleave',function(){hold=false;});
   box.addEventListener('focusin',function(){hold=true;});box.addEventListener('focusout',function(){hold=false;});
-  label();start();
+  start();
   var t;window.addEventListener('resize',function(){clearTimeout(t);t=setTimeout(fit,200);});
   if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fit);
 })();
